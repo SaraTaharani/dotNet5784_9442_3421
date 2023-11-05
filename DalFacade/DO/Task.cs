@@ -1,6 +1,4 @@
-﻿
-
-namespace DO;
+﻿namespace DO;
 
 /// <summary>
 /// An engineer's mission statement entity
