@@ -15,7 +15,9 @@ public record Engineer
     int Id,
     string Name,
     string Email,
-    int Cost,
-    EngineerExperience Level,
+    int? Cost=null,
+    EngineerExperience? Level=null,
     bool active=true
+
+
 );

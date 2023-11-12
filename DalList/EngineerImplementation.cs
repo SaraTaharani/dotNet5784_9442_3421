@@ -26,7 +26,7 @@ public class EngineerImplementation : IEngineer
     //Reads all entity objects
     public List<Engineer> ReadAll()
     {
-        return new List<Engineer>(DataSource.Engineers);
+        return new List<Engineer>(DataSource.Engineers!);
     }
 
     //Updates entity object

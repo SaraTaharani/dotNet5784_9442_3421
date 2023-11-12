@@ -2,6 +2,8 @@
 //namespace Dal:
 using DalApi;
 using DO;
+using System.Xml.Linq;
+
 public static class Initialization
 {
     public const int MIN_ID = 200000000;
@@ -35,9 +37,9 @@ public static class Initialization
         foreach (var _name in engineerNames)
         {
             int _id;
-            do
+            
                 _id = s_rand.Next(MIN_ID, MAX_ID + 1);
-            while (s_dalEngineer!.Read(_id) != null);
+         //   while (s_dalEngineer!.Read(_id) != null);
             string _email = _name + _id + "@gmail.com";
             int _cost = 0;
             EngineerExperience _level = (EngineerExperience)s_rand.Next(0, Enum.GetValues<EngineerExperience>().Count());
@@ -52,8 +54,8 @@ public static class Initialization
                 default:
                     break;
             }
-            Engineer newEng = new(_id, _name, _email, _cost, _level, true);
-            s_dalEngineer!.Create(newEng);
+
+            s_dalEngineer!.Create(new Engineer(_id, _name, _email, _cost, _level, true));
         }
     }
 
