@@ -95,11 +95,11 @@ public static class Initialization
         }
     }
 
-    public static void DO(IEngineer? s_dalEngineer, ITask? s_dalTask, IDependency? s_dalDependency)
+    public static void DO(IEngineer? s_dalEngineer1, ITask? s_dalTask1, IDependency? s_dalDependency1)
     {
-        s_dalEngineer = s_dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
-        s_dalTask = s_dalTask ?? throw new NullReferenceException("DAL can not be null!");
-        s_dalDependency = s_dalDependency ?? throw new NullReferenceException("DAL can not be null!");
+        s_dalEngineer = s_dalEngineer1 ?? throw new NullReferenceException("DAL can not be null!");
+        s_dalTask = s_dalTask1 ?? throw new NullReferenceException("DAL can not be null!");
+        s_dalDependency = s_dalDependency1 ?? throw new NullReferenceException("DAL can not be null!");
         createEngineer();
         createTask();
         createDependency();
