@@ -5,7 +5,7 @@ using DalApi;
 using DO;
 using System.Collections.Generic;
 
-public class EngineerImplementation : IEngineer
+internal class EngineerImplementation : IEngineer
 {
     //Creates new entity object in DAL
     public int Create(Engineer item)

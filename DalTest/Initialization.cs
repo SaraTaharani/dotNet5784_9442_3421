@@ -8,9 +8,7 @@ public static class Initialization
 {
     public const int MIN_ID = 200000000;
     public const int MAX_ID = 400000000;
-    private static IDependency? s_dalDependency;
-    private static IEngineer? s_dalEngineer;
-    private static ITask? s_dalTask;
+    private static IDal? s_dal;
     private static readonly Random s_rand = new();
 
 
@@ -55,7 +53,7 @@ public static class Initialization
                     break;
             }
 
-            s_dalEngineer!.Create(new Engineer(_id, _name, _email, _cost, _level, true));
+            s_dal!.Engineer!.Create(new Engineer(_id, _name, _email, _cost, _level, true));
         }
     }
 
@@ -78,11 +76,11 @@ public static class Initialization
             "plaster",//גבס
             "color"//צבע
         };
-        List<Engineer> EngineersList = s_dalEngineer!.ReadAll();
+        List<Engineer> EngineersList = s_dal!.Engineer!.ReadAll();
         for (int i = 0; i < 10; i++)
         {
             Task newTask = new(0, taskDescriptions[i], null, false, null, null, null, null, null, "", "", EngineersList[i].Id, EngineersList[i].Level, true);
-            s_dalTask!.Create(newTask);
+            s_dal!.Task!.Create(newTask);
         }
     }
 
@@ -91,15 +89,13 @@ public static class Initialization
         for (int i = 0; i < 10; i++)
         {
             Dependency newDependency = new(0, i + 1, i);
-            s_dalDependency!.Create(newDependency);
+            s_dal!.Dependency!.Create(newDependency);
         }
     }
 
-    public static void DO(IEngineer? s_dalEngineer1, ITask? s_dalTask1, IDependency? s_dalDependency1)
+    public static void Do(IDal dal)
     {
-        s_dalEngineer = s_dalEngineer1 ?? throw new NullReferenceException("DAL can not be null!");
-        s_dalTask = s_dalTask1 ?? throw new NullReferenceException("DAL can not be null!");
-        s_dalDependency = s_dalDependency1 ?? throw new NullReferenceException("DAL can not be null!");
+        s_dal= dal ?? throw new NullReferenceException("DAL can not be null!");
         createEngineer();
         createTask();
         createDependency();

@@ -9,10 +9,7 @@ namespace DalTest
 {
     internal class Program
     {
-        private static IEngineer? s_dalEngineer = new EngineerImplementation();
-        private static ITask? s_dalTask = new TaskImplementation();
-        private static IDependency? s_dalDependency = new DependencyImplementation();
-
+        static readonly IDal s_dal = new DalList();
 
         public static void CRUDEngineer()
         {
@@ -32,7 +29,7 @@ namespace DalTest
                         Engineer newEngineer = new(id, name, email);
                         try
                         {
-                            int ans = s_dalEngineer!.Create(newEngineer);
+                            int ans = s_dal!.Engineer!.Create(newEngineer);
                             Console.WriteLine("the engineer was addad");
                         }
                         catch (Exception ex)
@@ -45,7 +42,7 @@ namespace DalTest
                         int idRead = int.Parse(Console.ReadLine()!);
                         try
                         {
-                            Console.WriteLine(s_dalEngineer!.Read(idRead));
+                            Console.WriteLine(s_dal!.Engineer!.Read(idRead));
                         }
                         catch (Exception ex)
                         {
@@ -54,7 +51,7 @@ namespace DalTest
                         break;
                     case 'c'://readAll
                         Console.WriteLine("the list of the engineers");
-                        List<Engineer> listEngineers = s_dalEngineer!.ReadAll(); ;
+                        List<Engineer> listEngineers = s_dal!.Engineer!.ReadAll(); ;
                         foreach (Engineer engineer in listEngineers) { Console.WriteLine(engineer); }
                         break;
                     case 'd'://update
@@ -76,7 +73,7 @@ namespace DalTest
                             Console.WriteLine("enter cost of engineer to update");
                             int cost = int.Parse(Console.ReadLine()!);
                             Engineer updateEngineer = new(idUpdate, nameUpdate, emailUpdate, cost, levelUpdate);
-                            s_dalEngineer!.Update(updateEngineer);
+                            s_dal!.Engineer!.Update(updateEngineer);
                         }
                         catch (Exception ex) { Console.WriteLine(ex.ToString()); }
                         break;
@@ -85,7 +82,7 @@ namespace DalTest
                         int idDelete = int.Parse(Console.ReadLine()!);
                         try
                         {
-                            s_dalEngineer!.Delete(idDelete);
+                            s_dal!.Engineer!.Delete(idDelete);
                         }
                         catch (Exception ex) { Console.WriteLine(ex.ToString()); }
                         break;
@@ -109,7 +106,7 @@ namespace DalTest
                         DO.Task task = new(0, description, alias);
                         try
                         {
-                            int result = s_dalTask!.Create(task);
+                            int result = s_dal!.Task!.Create(task);
                             Console.WriteLine("the task was added");
                         }
                         catch (Exception ex)
@@ -122,7 +119,7 @@ namespace DalTest
                         int id = int.Parse(Console.ReadLine()!);
                         try
                         {
-                            Console.WriteLine(s_dalTask?.Read(id));
+                            Console.WriteLine(s_dal!.Task?.Read(id));
                         }
                         catch (Exception ex)
                         {
@@ -131,7 +128,7 @@ namespace DalTest
                         break;
                     case 'c'://read all tasks
                         Console.WriteLine("all  tasks:");
-                        List<DO.Task> arryOfAllTask = s_dalTask!.ReadAll();
+                        List<DO.Task> arryOfAllTask = s_dal!.Task!.ReadAll();
                         foreach (var item in arryOfAllTask)
                             Console.WriteLine(item);
                         break;
@@ -157,7 +154,7 @@ namespace DalTest
                         int idForDelete = int.Parse(Console.ReadLine()!);
                         try
                         {
-                            s_dalTask!.Delete(idForDelete);
+                            s_dal!.Task!.Delete(idForDelete);
                         }
                         catch (Exception ex)
                         {
@@ -186,7 +183,7 @@ namespace DalTest
                         try
                         {
 
-                            int result = s_dalDependency!.Create(d);
+                            int result = s_dal!.Dependency!.Create(d);
                             Console.WriteLine("the dependency was added");
                         }
                         catch (Exception ex)
@@ -200,7 +197,7 @@ namespace DalTest
 
                         try
                         {
-                            Console.WriteLine(s_dalDependency?.Read(myId));
+                            Console.WriteLine(s_dal!.Dependency?.Read(myId));
                         }
                         catch (Exception ex)
                         {
@@ -209,7 +206,7 @@ namespace DalTest
                         break;
                     case 'c'://read all
                         Console.WriteLine("all  dependencies:");
-                        List<DO.Dependency> arryOfAllDepdndencies = s_dalDependency!.ReadAll();
+                        List<DO.Dependency> arryOfAllDepdndencies = s_dal!.Dependency!.ReadAll();
                         foreach (var dep in arryOfAllDepdndencies)
                             Console.WriteLine(dep);
                         break;
@@ -224,7 +221,7 @@ namespace DalTest
                             int depIdBefor = int.Parse(Console.ReadLine()!);
                             DO.Dependency upDepend = new(idUpdate, depId, depIdBefor);
 
-                            s_dalDependency?.Update(upDepend);
+                            s_dal!.Dependency?.Update(upDepend);
 
                         }
                         catch (Exception ex)
@@ -237,7 +234,7 @@ namespace DalTest
                         int idForDelete = int.Parse(Console.ReadLine()!);
                         try
                         {
-                            s_dalDependency?.Delete(idForDelete);
+                            s_dal!.Dependency?.Delete(idForDelete);
                         }
                         catch (Exception ex)
                         {
@@ -266,7 +263,7 @@ namespace DalTest
         static void Main(string[] args)
         {
             int choose;
-            Initialization.DO(s_dalEngineer, s_dalTask, s_dalDependency);
+            Initialization.Do(s_dal);
             do
             {
                 Console.WriteLine("For engineer press 1");
