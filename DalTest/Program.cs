@@ -51,7 +51,7 @@ namespace DalTest
                         break;
                     case 'c'://readAll
                         Console.WriteLine("the list of the engineers");
-                        List<Engineer> listEngineers = s_dal!.Engineer!.ReadAll(); ;
+                        IEnumerable<Engineer?> listEngineers = s_dal!.Engineer!.ReadAll(); ;
                         foreach (Engineer engineer in listEngineers) { Console.WriteLine(engineer); }
                         break;
                     case 'd'://update
@@ -128,7 +128,7 @@ namespace DalTest
                         break;
                     case 'c'://read all tasks
                         Console.WriteLine("all  tasks:");
-                        List<DO.Task> arryOfAllTask = s_dal!.Task!.ReadAll();
+                        IEnumerable<DO.Task?> arryOfAllTask = s_dal!.Task!.ReadAll();
                         foreach (var item in arryOfAllTask)
                             Console.WriteLine(item);
                         break;
@@ -206,7 +206,7 @@ namespace DalTest
                         break;
                     case 'c'://read all
                         Console.WriteLine("all  dependencies:");
-                        List<DO.Dependency> arryOfAllDepdndencies = s_dal!.Dependency!.ReadAll();
+                        IEnumerable<Dependency?> arryOfAllDepdndencies = s_dal!.Dependency!.ReadAll();
                         foreach (var dep in arryOfAllDepdndencies)
                             Console.WriteLine(dep);
                         break;

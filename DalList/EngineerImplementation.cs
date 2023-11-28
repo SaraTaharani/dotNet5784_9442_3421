@@ -20,19 +20,31 @@ internal class EngineerImplementation : IEngineer
     //Reads entity object by its ID 
     public Engineer? Read(int id)
     {
-        return DataSource.Engineers.Find(x => x?.Id == id);
+        return DataSource.Engineers.FirstOrDefault(engineer => engineer?.Id == id);
+    }
+    //reads the entity object that the filter function returns for it true
+    public Engineer? Read(Func<Engineer, bool> filter)
+    {
+        return DataSource.Engineers.FirstOrDefault(engineer => filter(engineer!));
+    }
+    //Reads all entity objects
+    public IEnumerable<Engineer> ReadAll(Func<Engineer, bool>? filter = null) //stage 2
+    {
+        if (filter != null)
+        {
+            return from item in DataSource.Engineers
+                   where filter(item)
+                   select item;
+        }
+        return from item in DataSource.Engineers
+               select item;
     }
 
-    //Reads all entity objects
-    public List<Engineer> ReadAll()
-    {
-        return new List<Engineer>(DataSource.Engineers!);
-    }
 
     //Updates entity object
     public void Update(Engineer item)
     {
-        Engineer? engineer = Read(item.Id);
+        Engineer? engineer = DataSource.Engineers.FirstOrDefault(engineer => engineer?.Id == item.Id);
         if (engineer is null)
             throw new Exception($"Engineer with ID={item.Id} is not exists");
         DataSource.Engineers.Remove(engineer);
@@ -42,7 +54,7 @@ internal class EngineerImplementation : IEngineer
     //Deletes an object by its Id
     public void Delete(int id)
     {
-        Engineer? engineer = Read(id);
+        Engineer? engineer = DataSource.Engineers.FirstOrDefault(engineer => engineer?.Id == id);
         if (engineer is null)
             throw new Exception($"Engineer with ID={id} is not exists");
         if (DataSource.Tasks.Find(x => x?.EngineerId == id) is not null)///if the task cant be delete

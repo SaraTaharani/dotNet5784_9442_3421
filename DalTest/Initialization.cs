@@ -1,7 +1,11 @@
-﻿namespace DalTest;
+﻿using Dal;
+
+namespace DalTest;
+
 //namespace Dal:
 using DalApi;
 using DO;
+using System.Data.Common;
 using System.Xml.Linq;
 
 public static class Initialization
@@ -76,10 +80,11 @@ public static class Initialization
             "plaster",//גבס
             "color"//צבע
         };
-        List<Engineer> EngineersList = s_dal!.Engineer!.ReadAll();
+        //
+        EngineerExperience _complexityLevel = (EngineerExperience)(s_rand.Next(0, 3));
         for (int i = 0; i < 10; i++)
         {
-            Task newTask = new(0, taskDescriptions[i], null, false, null, null, null, null, null, "", "", EngineersList[i].Id, EngineersList[i].Level, true);
+            Task newTask = new(0, taskDescriptions[i], null, false, null, null, null, null, null, "", "",null, _complexityLevel, true);
             s_dal!.Task!.Create(newTask);
         }
     }

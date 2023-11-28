@@ -18,18 +18,30 @@ internal class TaskImplementation : ITask
     //Reads entity object by its ID 
     public Task? Read(int id)
     {
-        return DataSource.Tasks.Find(x => x?.Id == id);
+        return DataSource.Tasks.FirstOrDefault(task => task?.Id == id);
+    }
+    //reads the entity object that the filter function returns for it true
+    public Task? Read(Func<Task, bool> filter)
+    {
+        return DataSource.Tasks.FirstOrDefault(task => filter(task!));
+    }
+    //Reads all entity objects
+    public IEnumerable<Task> ReadAll(Func<Task, bool>? filter = null)
+    {
+        if (filter != null)
+        {
+            return from item in DataSource.Tasks
+                   where filter(item)
+                   select item;
+        }
+        return from item in DataSource.Tasks
+               select item;
     }
 
-    //Reads all entity objects
-    public List<Task> ReadAll()
-    {
-        return new List<Task>(DataSource.Tasks);
-    }
     //Updates entity object
     public void Update(Task item)
     {
-        Task? task = Read(item.Id);
+        Task? task = DataSource.Tasks.FirstOrDefault(task => task?.Id == item.Id);
         if (task is null)
             throw new Exception($"Task with ID={item.Id} is not exists");
         DataSource.Tasks.Remove(task);

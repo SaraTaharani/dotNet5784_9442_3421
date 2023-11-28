@@ -20,19 +20,30 @@ internal class DependencyImplementation : IDependency
     //Reads entity object by its ID 
     public Dependency? Read(int id)
     {
-        return DataSource.Dependencies.Find(x => x?.Id == id);
+        return DataSource.Dependencies.FirstOrDefault(dependency => dependency?.Id == id);
+    }
+    //reads the entity object that the filter function returns for it true
+  public Dependency? Read(Func<Dependency, bool> filter)
+    {
+        return DataSource.Dependencies.FirstOrDefault(dependency=>filter(dependency!));
+    }
+    public IEnumerable<Dependency> ReadAll(Func<Dependency, bool>? filter = null) //stage 2
+    {
+        if (filter != null)
+        {
+            return from item in DataSource.Dependencies
+                   where filter(item)
+                   select item;
+        }
+        return from item in DataSource.Dependencies
+               select item;
     }
 
-    //Reads all entity objects
-    public List<Dependency> ReadAll()
-    {
-        return new List<Dependency>(DataSource.Dependencies);
-    }
 
     //Updates entity object
     public void Update(Dependency item)
     {
-        Dependency? dependency = Read(item.Id);
+        Dependency? dependency = DataSource.Dependencies.FirstOrDefault(dependency => dependency?.Id == item.Id);
         if (dependency is null)
             throw new Exception($"Dependency with ID={item.Id} is not exists");
         DataSource.Dependencies.Remove(dependency);
