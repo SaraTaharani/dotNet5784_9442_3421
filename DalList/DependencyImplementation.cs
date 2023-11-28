@@ -23,9 +23,9 @@ internal class DependencyImplementation : IDependency
         return DataSource.Dependencies.FirstOrDefault(dependency => dependency?.Id == id);
     }
     //reads the entity object that the filter function returns for it true
-  public Dependency? Read(Func<Dependency, bool> filter)
+    public Dependency? Read(Func<Dependency, bool> filter)
     {
-        return DataSource.Dependencies.FirstOrDefault(dependency=>filter(dependency!));
+        return DataSource.Dependencies.FirstOrDefault(dependency => filter(dependency!));
     }
     public IEnumerable<Dependency> ReadAll(Func<Dependency, bool>? filter = null) //stage 2
     {
@@ -45,7 +45,7 @@ internal class DependencyImplementation : IDependency
     {
         Dependency? dependency = DataSource.Dependencies.FirstOrDefault(dependency => dependency?.Id == item.Id);
         if (dependency is null)
-            throw new Exception($"Dependency with ID={item.Id} is not exists");
+            throw new DalDoesNotExistException($"Dependency with ID={item.Id} is not exists");
         DataSource.Dependencies.Remove(dependency);
         DataSource.Dependencies.Add(item);
     }
@@ -53,9 +53,9 @@ internal class DependencyImplementation : IDependency
     //Deletes an object by is Id
     public void Delete(int id)
     {
-        Dependency? dependency = Read(id);
+        Dependency? dependency = DataSource.Dependencies.FirstOrDefault(dependency => filter(dependency!));
         if (dependency is null)
-            throw new Exception($"Dependency with ID={id} is not exists");
+            throw new DalDoesNotExistException($"Dependency with ID={id} is not exists");
         DataSource.Dependencies.Remove(dependency);
     }
 }

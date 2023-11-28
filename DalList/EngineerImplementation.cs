@@ -12,7 +12,7 @@ internal class EngineerImplementation : IEngineer
     {
         //for entities with normal id (not auto id)
         if (Read(item.Id) is not null)
-            throw new Exception($"Engineer with ID={item.Id} already exists");
+            throw new DalAlreadyExistsException($"Engineer with ID={item.Id} already exists");
         DataSource.Engineers.Add(item);
         return item.Id;
     }
@@ -46,7 +46,7 @@ internal class EngineerImplementation : IEngineer
     {
         Engineer? engineer = DataSource.Engineers.FirstOrDefault(engineer => engineer?.Id == item.Id);
         if (engineer is null)
-            throw new Exception($"Engineer with ID={item.Id} is not exists");
+            throw new DalDoesNotExistException($"Engineer with ID={item.Id} is not exists");
         DataSource.Engineers.Remove(engineer);
         DataSource.Engineers.Add(item);
     }
@@ -56,9 +56,9 @@ internal class EngineerImplementation : IEngineer
     {
         Engineer? engineer = DataSource.Engineers.FirstOrDefault(engineer => engineer?.Id == id);
         if (engineer is null)
-            throw new Exception($"Engineer with ID={id} is not exists");
+            throw new DalDoesNotExistException($"Engineer with ID={id} is not exists");
         if (DataSource.Tasks.Find(x => x?.EngineerId == id) is not null)///if the task cant be delete
-            throw new Exception($"Task with ID={id} cant be deleted");
+            throw new DalDoesNotExistException($"Task with ID={id} cant be deleted");
         Engineer newEngineer = new Engineer(engineer.Id, engineer.Name, engineer.Email, engineer.Cost, engineer.Level, false);
         DataSource.Engineers.Remove(engineer);
         DataSource.Engineers.Add(newEngineer);
