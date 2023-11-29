@@ -68,7 +68,7 @@ namespace DalTest
                             EngineerExperience levelUpdate;
                             bool b = Enum.TryParse<EngineerExperience>(level.ToString(), out levelUpdate);
                             if (!b)
-                                throw new Exception("enter an engineer level between 0 - 2");
+                                throw new LogicException("enter an engineer level between 0 - 2");
                             EngineerExperience leveluUpdate = (EngineerExperience)level;
                             Console.WriteLine("enter cost of engineer to update");
                             int cost = int.Parse(Console.ReadLine()!);
@@ -109,7 +109,7 @@ namespace DalTest
                             int result = s_dal!.Task!.Create(task);
                             Console.WriteLine("the task was added");
                         }
-                        catch (Exception ex)
+                        catch (DalAlreadyExistsException ex)
                         {
                             Console.WriteLine(ex);
                         }

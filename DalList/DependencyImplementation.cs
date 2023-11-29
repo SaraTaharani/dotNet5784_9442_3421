@@ -53,7 +53,7 @@ internal class DependencyImplementation : IDependency
     //Deletes an object by is Id
     public void Delete(int id)
     {
-        Dependency? dependency = DataSource.Dependencies.FirstOrDefault(dependency => filter(dependency!));
+        Dependency? dependency = DataSource.Dependencies.FirstOrDefault(dependency => dependency?.Id == id);
         if (dependency is null)
             throw new DalDoesNotExistException($"Dependency with ID={id} is not exists");
         DataSource.Dependencies.Remove(dependency);

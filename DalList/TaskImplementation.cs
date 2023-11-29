@@ -55,7 +55,7 @@ internal class TaskImplementation : ITask
         if (task is null)
             throw new DalDoesNotExistException($"Task with ID={id} is not exists");
         if (DataSource.Dependencies.Find(x => x?.DependsOnTask == id) is not null)///if the task cant be delete
-            throw new DalDoesNotExistException($"Task with ID={id} cant be deleted");
+            throw new DalDeletionImpossible($"Task with ID={id} cant be deleted");
         Task newTask = new Task(DataSource.Config.NextTaskId, task.Description, task.Alias, task.Milestone, task.CreatedAt, task.Start, task.ForecastDate, task.Deadline, task.Complete, task.Deliverables, task.Remarks, task.EngineerId, task.ComlexityLevel, false);
         DataSource.Tasks.Remove(task);
         DataSource.Tasks.Add(newTask);
