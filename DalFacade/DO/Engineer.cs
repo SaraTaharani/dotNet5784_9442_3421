@@ -9,7 +9,7 @@ namespace DO;
 /// <param name="Email"></param>
 /// <param name="Cost"></param>
 /// <param name="Level"></param>
-/// <param name="active"></param>
+/// <param name="Active"></param>
 public record Engineer
 (
     int Id,
@@ -17,7 +17,5 @@ public record Engineer
     string Email,
     int? Cost=null,
     EngineerExperience? Level=null,
-    bool active=true
-
-
+    bool Active=true
 );
