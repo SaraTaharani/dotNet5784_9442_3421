@@ -1,3 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTask>
+	<Task>
+		<Id>1</Id>
+		<Description>building permits</Description>
+		<Milestone>false</Milestone>
+		<CreatedAt>01/01/2020</CreatedAt>
+		<Start>01/01/2020</Start>
+		<ForecastDate>01/01/2020</ForecastDate>
+		<Deadline>01/01/2020</Deadline>
+		<Complete>01/01/2020</Complete>
+		<Deliverables></Deliverables>
+		<Remarks></Remarks>
+		<EngineerId></EngineerId>
+		<ComlexityLevel></ComlexityLevel>
+		<Active></Active>
+	</Task>
 </ArrayOfTask>

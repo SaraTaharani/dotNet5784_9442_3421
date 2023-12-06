@@ -10,7 +10,6 @@ internal class EngineerImplementation : IEngineer
     //Creates new entity object in DAL
     public int Create(Engineer item)
     {
-        //for entities with normal id (not auto id)
         if (Read(item.Id) is not null)
             throw new DalAlreadyExistsException($"Engineer with ID={item.Id} already exists");
         DataSource.Engineers.Add(item);

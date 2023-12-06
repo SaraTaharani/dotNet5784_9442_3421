@@ -84,7 +84,7 @@ public static class Initialization
         EngineerExperience _complexityLevel = (EngineerExperience)(s_rand.Next(0, 3));
         for (int i = 0; i < 10; i++)
         {
-            Task newTask = new(0, taskDescriptions[i], null, false, null, null, null, null, null, "", "",null, _complexityLevel, true);
+            Task newTask = new(i, taskDescriptions[i], null, false, null, null, null, null, null, "", "",null, _complexityLevel, true);
             s_dal!.Task!.Create(newTask);
         }
     }
