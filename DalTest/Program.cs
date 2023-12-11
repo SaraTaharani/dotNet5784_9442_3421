@@ -9,7 +9,7 @@ namespace DalTest
 {
     internal class Program
     {
-        static readonly IDal s_dal = new DalList();
+        static readonly IDal s_dal =  new Dal.DalXml(); 
 
         public static void CRUDEngineer()
         {
