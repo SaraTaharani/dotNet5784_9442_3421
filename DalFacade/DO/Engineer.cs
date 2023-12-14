@@ -18,4 +18,7 @@ public record Engineer
     int? Cost=null,
     EngineerExperience? Level=null,
     bool Active=true
-);
+)
+{
+    public Engineer() : this(0, "", "",null, EngineerExperience.expert) { }
+}

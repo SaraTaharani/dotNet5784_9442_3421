@@ -32,4 +32,11 @@ public record Task
     int? EngineerId = null,
     EngineerExperience? ComlexityLevel = null,
     bool Active = true
-);
+)
+
+
+{
+       public Task() : this(0) { }
+
+}
+

@@ -263,7 +263,11 @@ namespace DalTest
         static void Main(string[] args)
         {
             int choose;
-            Initialization.Do(s_dal);
+            Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
+
+            string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
+            if (ans == "Y") //stage 3
+                Initialization.Do(s_dal); //stage 2
             do
             {
                 Console.WriteLine("For engineer press 1");
