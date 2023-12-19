@@ -14,6 +14,9 @@ internal static class DataSource
         private static int nextDependencyId = startTaskId;
         internal static int NextDependencyId { get => nextDependencyId++; }
 
+        internal static DateTime? dateBeginProject = null;
+        internal static DateTime? dateEndProject = null;
+
     }
     internal static List<DO.Dependency?> Dependencies { get; } = new();
     internal static List<DO.Engineer?> Engineers { get; } = new();

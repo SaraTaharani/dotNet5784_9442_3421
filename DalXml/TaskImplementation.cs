@@ -4,6 +4,7 @@ using DO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 
 internal class TaskImplementation : ITask
 {
@@ -53,6 +54,17 @@ internal class TaskImplementation : ITask
             throw new DalDoesNotExistException($"Task with ID={item.Id} is not exists");
         lst.Remove(task);
         lst.Add(item);
+    }
+    public void Reset()
+    {
+        const string tasksFile = @"..\xml\tasks.xml";
+        XDocument tasksDocument = XDocument.Load(tasksFile);
+        XElement? tasksElements = tasksDocument.Root;
+        if (tasksElements != null)
+        {
+            tasksDocument.Elements().Remove();
+            tasksDocument.Save(tasksFile);
+        }
     }
 }
 

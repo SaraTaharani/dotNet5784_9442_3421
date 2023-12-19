@@ -4,6 +4,7 @@ namespace Dal;
 using DalApi;
 using DO;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 
 internal class DependencyImplementation : IDependency
 {
@@ -57,5 +58,11 @@ internal class DependencyImplementation : IDependency
         if (dependency is null)
             throw new DalDoesNotExistException($"Dependency with ID={id} is not exists");
         DataSource.Dependencies.Remove(dependency);
+    }
+
+    public void Reset()
+    {
+        if(DataSource.Dependencies.Any())//check if the dataSorce is empty
+        { DataSource.Dependencies.Clear(); }  //reset the data source
     }
 }

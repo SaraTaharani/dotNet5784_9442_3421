@@ -11,7 +11,14 @@ namespace Dal
     {
         public IEngineer Engineer => new EngineerImplementation();
         public ITask Task =>  new TaskImplementation();
-
         public IDependency Dependency => new DependencyImplementation();
+       public DateTime? dateBeginProject => Config.dateBeginProject;
+        public DateTime? dateEndProject => Config.dateEndProject;
+        public void Reset()
+        {
+            Engineer.Reset();
+            Task.Reset();
+            Dependency.Reset();
+        }
     }
 }

@@ -62,4 +62,9 @@ internal class EngineerImplementation : IEngineer
         DataSource.Engineers.Remove(engineer);
         DataSource.Engineers.Add(newEngineer);
     }
+    public void Reset()
+    {
+        if (DataSource.Engineers.Any())//check if the dataSorce is empty
+        { DataSource.Engineers.Clear(); }  //reset the data source
+    }
 }

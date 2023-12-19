@@ -60,4 +60,11 @@ internal class TaskImplementation : ITask
         DataSource.Tasks.Remove(task);
         DataSource.Tasks.Add(newTask);
     }
+    public void Reset()
+    {
+        if (DataSource.Tasks.Any())//check if the dataSorce is empty
+        { 
+            DataSource.Tasks.Clear(); 
+        }  //reset the data source
+    }
 }
