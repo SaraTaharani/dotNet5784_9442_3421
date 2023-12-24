@@ -11,7 +11,7 @@ internal class TaskImplementation : ITask
     public int Create(Task item)
     {
         List<Task> lst = XMLTools.LoadListFromXMLSerializer<Task>("tasks");
-        int id = XMLTools.GetAndIncreaseNextId("data-config", "Id");
+        int id = XMLTools.GetAndIncreaseNextId("data-config", "NextTaskId");
         Task copy = item with { Id = id };
         lst.Add(copy);
         XMLTools.SaveListToXMLSerializer<Task>(lst, "tasks");
@@ -20,9 +20,7 @@ internal class TaskImplementation : ITask
 
     public void Delete(int id)
     {
-        List<Task> lst = XMLTools.LoadListFromXMLSerializer<Task>("tasks");
-        lst.Remove(Read(id)!);
-        XMLTools.SaveListToXMLSerializer<Task>(lst, "tasks");
+        throw new DalDeletionImpossible($"Task with ID={id} cannot be deleted");
     }
 
     public Task? Read(int id)
@@ -54,6 +52,7 @@ internal class TaskImplementation : ITask
             throw new DalDoesNotExistException($"Task with ID={item.Id} is not exists");
         lst.Remove(task);
         lst.Add(item);
+        XMLTools.SaveListToXMLSerializer<Task>(lst, "tasks");
     }
     public void Reset()
     {

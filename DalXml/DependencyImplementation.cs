@@ -12,15 +12,12 @@ internal class DependencyImplementation : IDependency
     public int Create(Dependency item)
     {
         int newDependencyId = Config.NextDependencyId;
-
         XElement? dependencyElement = new XElement("Dependency",
             new XElement("Id", newDependencyId),
             new XElement("DependentTask", item.DependentTask),
             new XElement("DependsOnTask", item.DependsOnTask));
-
         dependenciesDocument.Root?.Add(dependencyElement);
         dependenciesDocument.Save(dependenciesFile);
-
         return newDependencyId;
     }
 
@@ -81,7 +78,7 @@ internal class DependencyImplementation : IDependency
 
     public IEnumerable<Dependency?> ReadAll(Func<Dependency, bool>? filter = null)
     {
-        XElement? dependenciesElement = XMLTools.LoadListFromXMLElement("dependencys");
+        XElement? dependenciesElement = XMLTools.LoadListFromXMLElement("dependencies");
         IEnumerable<Dependency> dependencies = dependenciesElement
             .Elements("Dependency")
             .Select(e => new Dependency(
@@ -104,6 +101,10 @@ internal class DependencyImplementation : IDependency
             throw new DalDoesNotExistException($"Dependency with ID={item.Id} is not exists");
         lst.Remove(dependency);
         lst.Add(item);
+
+        dependenciesDocument.Root?.Add(lst);
+        dependenciesDocument.Save(dependenciesFile);
+
     }
     public void Reset()
     {

@@ -96,7 +96,7 @@ namespace DalTest
             char choose;
             do
             {
-                choose = submenu("Engineer");
+                choose = submenu("Task");
                 switch (choose)
                 {
                     case 'a'://add a task
@@ -134,7 +134,7 @@ namespace DalTest
                             Console.WriteLine(item);
                         break;
                     case 'd'://update the task
-                        Console.WriteLine("enter id of tasky to update");
+                        Console.WriteLine("enter id of task to update");
                         int idUpdate = int.Parse(Console.ReadLine()!);
                         try
                         {
@@ -142,7 +142,8 @@ namespace DalTest
                             string upalias = Console.ReadLine()!;
                             Console.WriteLine("enter task description ");
                             string updescription = Console.ReadLine()!;
-                            DO.Task upTask = new(0, updescription, upalias);
+                            DO.Task upTask = new(idUpdate, updescription, upalias);
+                            s_dal!.Task!.Update(upTask);
                         }
                         catch (Exception ex)
                         {
@@ -171,19 +172,17 @@ namespace DalTest
             char choose;
             do
             {
-                choose = submenu("Engineer");
+                choose = submenu("Dependency");
                 switch (choose)
                 {
-
                     case 'a'://add                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            t = new Task();
                         Console.WriteLine("enter a dependent task id");
                         int id = int.Parse(Console.ReadLine()!);
-                        Console.WriteLine("enter the  task befor ");
+                        Console.WriteLine("enter the task befor ");
                         int idBefor = int.Parse(Console.ReadLine()!);
                         DO.Dependency d = new(4, id, idBefor);
                         try
                         {
-
                             int result = s_dal!.Dependency!.Create(d);
                             Console.WriteLine("the dependency was added");
                         }

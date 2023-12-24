@@ -1,119 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ArrayOfTask>
-	<Task>
-		<Id>1</Id>
-		<Description>building permits</Description>
-		<Alias>Alias building permits </Alias>
-		<EngineerId>111111111</EngineerId>
-		<ComplexityLevel>expert</ComplexityLevel>
-		<CreatedAt>2022-01-01</CreatedAt>
-	</Task>
-	<Task>
-		<Id>2</Id>
-		<Description>organization</Description>
-		<Alias>Alias organization </Alias>
-		<EngineerId>222222222</EngineerId>
-		<ComplexityLevel>Jr</ComplexityLevel>
-		<CreatedAt>2022-02-01</CreatedAt>
-	</Task>
-	<Task>
-		<Id>3</Id>
-		<Description>measurement</Description>
-		<Alias>Alias measurement </Alias>
-		<EngineerId>333333333</EngineerId>
-		<ComplexityLevel>rookie</ComplexityLevel>
-		<CreatedAt>2022-03-01</CreatedAt>
-	</Task>
-	<Task>
-		<Id>4</Id>
-		<Description>Fencing the site</Description>
-		<Alias>Alias Fencing the site </Alias>
-		<EngineerId>333333333</EngineerId>
-		<ComplexityLevel>rookie</ComplexityLevel>
-		<CreatedAt>2022-04-01</CreatedAt>
-	</Task>
-	<Task>
-		<Id>5</Id>
-		<Description>digging</Description>
-		<Alias>Alias digging </Alias>
-		<EngineerId>333333333</EngineerId>
-		<ComplexityLevel>rookie</ComplexityLevel>
-		<CreatedAt>2022-05-01</CreatedAt>
-	</Task>
-	<Task>
-		<Id>6</Id>
-		<Description>grounding</Description>
-		<Alias>Alias grounding </Alias>
-		<EngineerId>444444444</EngineerId>
-		<ComplexityLevel>expert</ComplexityLevel>
-		<CreatedAt>2022-05-01</CreatedAt>
-	</Task>
-	<Task>
-		<Id>7</Id>
-		<Description>plumbing</Description>
-		<Alias>Alias plumbing </Alias>
-		<EngineerId>555555555</EngineerId>
-		<ComplexityLevel>Jr</ComplexityLevel>
-		<CreatedAt>2022-06-01</CreatedAt>
-	</Task>
-	<Task>
-		<Id>8</Id>
-		<Description>electrical power</Description>
-		<Alias>Alias electrical power </Alias>
-		<EngineerId>666666666</EngineerId>
-		<ComplexityLevel>rookie</ComplexityLevel>
-		<CreatedAt>2022-07-01</CreatedAt>
-	</Task>
-	<Task>
-		<Id>9</Id>
-		<Description>construction</Description>
-		<Alias>Alias construction </Alias>
-		<EngineerId>777777777</EngineerId>
-		<ComplexityLevel>expert</ComplexityLevel>
-		<CreatedAt>2022-08-01</CreatedAt>
-	</Task>
-	<Task>
-		<Id>10</Id>
-		<Description>sealing</Description>
-		<Alias>Alias sealing </Alias>
-		<EngineerId>888888888</EngineerId>
-		<ComplexityLevel>Jr</ComplexityLevel>
-		<CreatedAt>2022-09-01</CreatedAt>
-	</Task>
-	<Task>
-		<Id>11</Id>
-		<Description>frames</Description>
-		<Alias>Alias frames </Alias>
-		<EngineerId>999999999</EngineerId>
-		<ComplexityLevel>rookie</ComplexityLevel>
-		<CreatedAt>2022-10-01</CreatedAt>
-	</Task>
-	<Task>
-		<Id>12</Id>
-		<Description>Elevators</Description>
-		<Alias>Alias Elevators </Alias>
-		<EngineerId>122222222</EngineerId>
-		<ComplexityLevel>expert</ComplexityLevel>
-		<CreatedAt>2022-11-01</CreatedAt>
-	</Task>
-	<Task>
-		<Id>13</Id>
-		<Description>plaster</Description>
-		<Alias>Alias plaster </Alias>
-		<EngineerId>133333333</EngineerId>
-		<ComplexityLevel>Jr</ComplexityLevel>
-		<CreatedAt>2022-12-01</CreatedAt>
-	</Task>
-	<Task>
-		<Id>14</Id>
-		<Description>color</Description>
-		<Alias>Alias color </Alias>
-		<EngineerId>133333333</EngineerId>
-		<ComplexityLevel>Jr</ComplexityLevel>
-		<CreatedAt>2023-01-01</CreatedAt>
-	</Task>
+<ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Task>
+    <Id>1</Id>
+    <Description>building permits</Description>
+    <Alias>Alias building permits </Alias>
+    <Milestone xsi:nil="true" />
+    <CreatedAt>2022-01-01T00:00:00</CreatedAt>
+    <Start xsi:nil="true" />
+    <ForecastDate xsi:nil="true" />
+    <Deadline xsi:nil="true" />
+    <Complete xsi:nil="true" />
+    <EngineerId>111111111</EngineerId>
+    <ComlexityLevel xsi:nil="true" />
+    <Active>true</Active>
+  </Task>
+  <Task>
+    <Id>2</Id>
+    <Description>organization</Description>
+    <Alias>Alias organization </Alias>
+    <Milestone xsi:nil="true" />
+    <CreatedAt>2022-02-01T00:00:00</CreatedAt>
+    <Start xsi:nil="true" />
+    <ForecastDate xsi:nil="true" />
+    <Deadline xsi:nil="true" />
+    <Complete xsi:nil="true" />
+    <EngineerId>222222222</EngineerId>
+    <ComlexityLevel xsi:nil="true" />
+    <Active>true</Active>
+  </Task>
+  <Task>
+    <Id>3</Id>
+    <Description>measurement</Description>
+    <Alias>Alias measurement </Alias>
+    <Milestone xsi:nil="true" />
+    <CreatedAt>2022-03-01T00:00:00</CreatedAt>
+    <Start xsi:nil="true" />
+    <ForecastDate xsi:nil="true" />
+    <Deadline xsi:nil="true" />
+    <Complete xsi:nil="true" />
+    <EngineerId>333333333</EngineerId>
+    <ComlexityLevel xsi:nil="true" />
+    <Active>true</Active>
+  </Task>
+  <Task>
+    <Id>4</Id>
+    <Description>Fencing the site</Description>
+    <Alias>Alias Fencing the site </Alias>
+    <Milestone xsi:nil="true" />
+    <CreatedAt>2022-04-01T00:00:00</CreatedAt>
+    <Start xsi:nil="true" />
+    <ForecastDate xsi:nil="true" />
+    <Deadline xsi:nil="true" />
+    <Complete xsi:nil="true" />
+    <EngineerId>333333333</EngineerId>
+    <ComlexityLevel xsi:nil="true" />
+    <Active>true</Active>
+  </Task>
+  <Task>
+    <Id>5</Id>
+    <Description>digging</Description>
+    <Alias>Alias digging </Alias>
+    <Milestone xsi:nil="true" />
+    <CreatedAt>2022-05-01T00:00:00</CreatedAt>
+    <Start xsi:nil="true" />
+    <ForecastDate xsi:nil="true" />
+    <Deadline xsi:nil="true" />
+    <Complete xsi:nil="true" />
+    <EngineerId>333333333</EngineerId>
+    <ComlexityLevel xsi:nil="true" />
+    <Active>true</Active>
+  </Task>
+  <Task>
+    <Id>6</Id>
+    <Description>grounding</Description>
+    <Alias>Alias grounding </Alias>
+    <Milestone xsi:nil="true" />
+    <CreatedAt>2022-05-01T00:00:00</CreatedAt>
+    <Start xsi:nil="true" />
+    <ForecastDate xsi:nil="true" />
+    <Deadline xsi:nil="true" />
+    <Complete xsi:nil="true" />
+    <EngineerId>444444444</EngineerId>
+    <ComlexityLevel xsi:nil="true" />
+    <Active>true</Active>
+  </Task>
+  <Task>
+    <Id>7</Id>
+    <Description>plumbing</Description>
+    <Alias>Alias plumbing </Alias>
+    <Milestone xsi:nil="true" />
+    <CreatedAt>2022-06-01T00:00:00</CreatedAt>
+    <Start xsi:nil="true" />
+    <ForecastDate xsi:nil="true" />
+    <Deadline xsi:nil="true" />
+    <Complete xsi:nil="true" />
+    <EngineerId>555555555</EngineerId>
+    <ComlexityLevel xsi:nil="true" />
+    <Active>true</Active>
+  </Task>
+  <Task>
+    <Id>8</Id>
+    <Description>electrical power</Description>
+    <Alias>Alias electrical power </Alias>
+    <Milestone xsi:nil="true" />
+    <CreatedAt>2022-07-01T00:00:00</CreatedAt>
+    <Start xsi:nil="true" />
+    <ForecastDate xsi:nil="true" />
+    <Deadline xsi:nil="true" />
+    <Complete xsi:nil="true" />
+    <EngineerId>666666666</EngineerId>
+    <ComlexityLevel xsi:nil="true" />
+    <Active>true</Active>
+  </Task>
+  <Task>
+    <Id>9</Id>
+    <Description>construction</Description>
+    <Alias>Alias construction </Alias>
+    <Milestone xsi:nil="true" />
+    <CreatedAt>2022-08-01T00:00:00</CreatedAt>
+    <Start xsi:nil="true" />
+    <ForecastDate xsi:nil="true" />
+    <Deadline xsi:nil="true" />
+    <Complete xsi:nil="true" />
+    <EngineerId>777777777</EngineerId>
+    <ComlexityLevel xsi:nil="true" />
+    <Active>true</Active>
+  </Task>
+  <Task>
+    <Id>10</Id>
+    <Description>sealing</Description>
+    <Alias>Alias sealing </Alias>
+    <Milestone xsi:nil="true" />
+    <CreatedAt>2022-09-01T00:00:00</CreatedAt>
+    <Start xsi:nil="true" />
+    <ForecastDate xsi:nil="true" />
+    <Deadline xsi:nil="true" />
+    <Complete xsi:nil="true" />
+    <EngineerId>888888888</EngineerId>
+    <ComlexityLevel xsi:nil="true" />
+    <Active>true</Active>
+  </Task>
+  <Task>
+    <Id>11</Id>
+    <Description>frames</Description>
+    <Alias>Alias frames </Alias>
+    <Milestone xsi:nil="true" />
+    <CreatedAt>2022-10-01T00:00:00</CreatedAt>
+    <Start xsi:nil="true" />
+    <ForecastDate xsi:nil="true" />
+    <Deadline xsi:nil="true" />
+    <Complete xsi:nil="true" />
+    <EngineerId>999999999</EngineerId>
+    <ComlexityLevel xsi:nil="true" />
+    <Active>true</Active>
+  </Task>
+  <Task>
+    <Id>12</Id>
+    <Description>Elevators</Description>
+    <Alias>Alias Elevators </Alias>
+    <Milestone xsi:nil="true" />
+    <CreatedAt>2022-11-01T00:00:00</CreatedAt>
+    <Start xsi:nil="true" />
+    <ForecastDate xsi:nil="true" />
+    <Deadline xsi:nil="true" />
+    <Complete xsi:nil="true" />
+    <EngineerId>122222222</EngineerId>
+    <ComlexityLevel xsi:nil="true" />
+    <Active>true</Active>
+  </Task>
+  <Task>
+    <Id>13</Id>
+    <Description>plaster</Description>
+    <Alias>Alias plaster </Alias>
+    <Milestone xsi:nil="true" />
+    <CreatedAt>2022-12-01T00:00:00</CreatedAt>
+    <Start xsi:nil="true" />
+    <ForecastDate xsi:nil="true" />
+    <Deadline xsi:nil="true" />
+    <Complete xsi:nil="true" />
+    <EngineerId>133333333</EngineerId>
+    <ComlexityLevel xsi:nil="true" />
+    <Active>true</Active>
+  </Task>
+  <Task>
+    <Id>14</Id>
+    <Description>color</Description>
+    <Alias>Alias color </Alias>
+    <Milestone xsi:nil="true" />
+    <CreatedAt>2023-01-01T00:00:00</CreatedAt>
+    <Start xsi:nil="true" />
+    <ForecastDate xsi:nil="true" />
+    <Deadline xsi:nil="true" />
+    <Complete xsi:nil="true" />
+    <EngineerId>133333333</EngineerId>
+    <ComlexityLevel xsi:nil="true" />
+    <Active>true</Active>
+  </Task>
 </ArrayOfTask>
-
-
-
-
