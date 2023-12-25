@@ -37,7 +37,7 @@ internal class DependencyImplementation : IDependency
             }
             else
             {
-                throw new DalDoesNotExistException("Dependency with the specified ID does not exist.");
+                throw new DalDoesNotExistException($"Dependency with the specified ID={id} does not exist.");
             }
         }
         else
@@ -104,27 +104,13 @@ internal class DependencyImplementation : IDependency
           new XElement("DependsOnTask", item.DependsOnTask));
       dependenciesDocument.Root?.Add(dependencyElement);
        dependenciesDocument.Save(dependenciesFile);
-     // return newDependencyId;
-
-
-
-
-
-        //List<Dependency> lst = XMLTools.LoadListFromXMLSerializer<Dependency>("dependencies");
-        //Dependency? dependency = lst.FirstOrDefault(dependency => dependency?.Id == item.Id);
-        //if (dependency is null)
-        //    throw new DalDoesNotExistException($"Dependency with ID={item.Id} is not exists");
-        //lst.Remove(dependency);
-        //lst.Add(item);
-
-        //dependenciesDocument.Root?.Add(lst);
-        //dependenciesDocument.Save(dependenciesFile);
+     
 
     }
-    public void Reset()
+    public void Reset()//remove all the dependency database
     {
         XElement root = XMLTools.LoadListFromXMLElement(data_config_xml);
-        root.Element("NextDependencyId")?.SetValue((1).ToString());
+        root.Element("NextDependencyId")?.SetValue((250).ToString());
         XMLTools.SaveListToXMLElement(root, data_config_xml);
         XElement? dependenciesElements = dependenciesDocument.Root;
         if(dependenciesElements != null ) {

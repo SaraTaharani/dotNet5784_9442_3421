@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 internal class TaskImplementation : ITask
 {
-    const string data_config_xml = @"data-config"; 
+  
     public int Create(Task item)
     {
         List<Task> lst = XMLTools.LoadListFromXMLSerializer<Task>("tasks");
@@ -58,16 +58,15 @@ internal class TaskImplementation : ITask
     
     public void Reset()
     {
+        const string data_config_xml = "data-config";
         XElement root = XMLTools.LoadListFromXMLElement(data_config_xml);
-        root.Element("NextTaskId")?.SetValue((1).ToString());
+        root.Element("NextTaskId")?.SetValue((100).ToString());
         XMLTools.SaveListToXMLElement(root, data_config_xml);
-        const string tasksFile = @"..\xml\tasks.xml";
+        const string tasksFile = "tasks";
         List<Task> tasks = XMLTools.LoadListFromXMLSerializer<Task>(tasksFile);
         tasks.Clear();
         XMLTools.SaveListToXMLSerializer<Task>(tasks, tasksFile);
-        //XDocument tasksDocument = XDocument.Load(tasksFile);
-        //XElement? tasksElements = tasksDocument.Root;
-        //if (tasksElements != null)
+        //if (tasks != null)
         //{
         //    tasksDocument.Elements().Remove();
         //    tasksDocument.Save(tasksFile);
