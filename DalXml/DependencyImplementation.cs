@@ -95,15 +95,29 @@ internal class DependencyImplementation : IDependency
 
     public void Update(Dependency item)
     {
-        List<Dependency> lst = XMLTools.LoadListFromXMLSerializer<Dependency>("dependencies");
-        Dependency? dependency = lst.FirstOrDefault(dependency => dependency?.Id == item.Id);
-        if (dependency is null)
-            throw new DalDoesNotExistException($"Dependency with ID={item.Id} is not exists");
-        lst.Remove(dependency);
-        lst.Add(item);
+        Delete(item.Id);
+        int newDependencyId = item.Id;
+       XElement? dependencyElement = new XElement("Dependency",
+          new XElement("Id", newDependencyId),
+           new XElement("DependentTask", item.DependentTask),
+          new XElement("DependsOnTask", item.DependsOnTask));
+      dependenciesDocument.Root?.Add(dependencyElement);
+       dependenciesDocument.Save(dependenciesFile);
+     // return newDependencyId;
 
-        dependenciesDocument.Root?.Add(lst);
-        dependenciesDocument.Save(dependenciesFile);
+
+
+
+
+        //List<Dependency> lst = XMLTools.LoadListFromXMLSerializer<Dependency>("dependencies");
+        //Dependency? dependency = lst.FirstOrDefault(dependency => dependency?.Id == item.Id);
+        //if (dependency is null)
+        //    throw new DalDoesNotExistException($"Dependency with ID={item.Id} is not exists");
+        //lst.Remove(dependency);
+        //lst.Add(item);
+
+        //dependenciesDocument.Root?.Add(lst);
+        //dependenciesDocument.Save(dependenciesFile);
 
     }
     public void Reset()

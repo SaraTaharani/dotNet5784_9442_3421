@@ -138,10 +138,11 @@ namespace DalTest
                         int idUpdate = int.Parse(Console.ReadLine()!);
                         try
                         {
-                            Console.WriteLine("enter alias task");
-                            string upalias = Console.ReadLine()!;
                             Console.WriteLine("enter task description ");
                             string updescription = Console.ReadLine()!;
+                            Console.WriteLine("enter alias task");
+                            string upalias = Console.ReadLine()!;
+                         
                             DO.Task upTask = new(idUpdate, updescription, upalias);
                             s_dal!.Task!.Update(upTask);
                         }
