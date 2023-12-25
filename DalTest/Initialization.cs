@@ -1,8 +1,4 @@
-﻿using Dal;
-
-namespace DalTest;
-
-//namespace Dal:
+﻿namespace DalTest;
 using DalApi;
 using DO;
 using System.Data.Common;
@@ -40,7 +36,7 @@ public static class Initialization
         {
             int _id;
             
-                _id = s_rand.Next(MIN_ID, MAX_ID + 1);
+            _id = s_rand.Next(MIN_ID, MAX_ID + 1);
          //   while (s_dalEngineer!.Read(_id) != null);
             string _email = _name + _id + "@gmail.com";
             int _cost = 0;
@@ -56,7 +52,6 @@ public static class Initialization
                 default:
                     break;
             }
-
             s_dal!.Engineer!.Create(new Engineer(_id, _name, _email, _cost, _level, true));
         }
     }
@@ -98,9 +93,11 @@ public static class Initialization
         }
     }
 
-    public static void Do(IDal dal)
+    //public static void Do(IDal dal) //stage 2
+    public static void Do() //stage 4
     {
-        s_dal= dal ?? throw new NullReferenceException("DAL can not be null!");
+        //s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
+        s_dal = DalApi.Factory.Get; //stage 4
         s_dal.Reset();
         createEngineer();
         createTask();
