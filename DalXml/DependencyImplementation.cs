@@ -7,6 +7,7 @@ using System.Xml.Linq;
 
 internal class DependencyImplementation : IDependency
 {
+    const string data_config_xml = @"data-config";
     const string dependenciesFile = @"..\xml\dependencies.xml";
     XDocument dependenciesDocument = XDocument.Load(dependenciesFile);
     public int Create(Dependency item)
@@ -122,6 +123,9 @@ internal class DependencyImplementation : IDependency
     }
     public void Reset()
     {
+        XElement root = XMLTools.LoadListFromXMLElement(data_config_xml);
+        root.Element("NextDependencyId")?.SetValue((1).ToString());
+        XMLTools.SaveListToXMLElement(root, data_config_xml);
         XElement? dependenciesElements = dependenciesDocument.Root;
         if(dependenciesElements != null ) {
             dependenciesElements.Elements().Remove();
