@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 internal class EngineerImplementation : IEngineer
 {
-    public int Create(Engineer item)
+    public int Create(Engineer item) //create a new engineer
     {
         List<Engineer> lst = XMLTools.LoadListFromXMLSerializer<Engineer>("engineers");
         if (Read(item.Id) is not null)
@@ -18,7 +18,7 @@ internal class EngineerImplementation : IEngineer
         return item.Id;
     }
 
-    public void Delete(int id)
+    public void Delete(int id) //delete an engineer
     {
         throw new DalDeletionImpossible($"Engineer with ID={id} cannot be deleted");
     }
@@ -29,7 +29,7 @@ internal class EngineerImplementation : IEngineer
         return lst.FirstOrDefault(engineer => engineer?.Id == id);
     }
 
-    public Engineer? Read(Func<Engineer, bool> filter)
+    public Engineer? Read(Func<Engineer, bool> filter) //read an engineer
     {
         List<Engineer> lst = XMLTools.LoadListFromXMLSerializer<Engineer>("engineers");
         if (filter != null)
@@ -39,7 +39,7 @@ internal class EngineerImplementation : IEngineer
         return lst.FirstOrDefault(engineer => filter!(engineer!));
     }
 
-    public IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? filter = null)
+    public IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? filter = null) //read all the engineers 
     {
         List<Engineer> lst = XMLTools.LoadListFromXMLSerializer<Engineer>("engineers");
         if (filter != null)
@@ -60,7 +60,7 @@ internal class EngineerImplementation : IEngineer
         XMLTools.SaveListToXMLSerializer<Engineer>(lst, "engineers");
     }
 
-    public void Reset()
+    public void Reset()//delete all the engineers
     {
         const string engineersFile = @"..\xml\engineers.xml";
         XDocument engineersDocument = XDocument.Load(engineersFile);
