@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    internal class MilestoneInTask
+    public class MilestoneInTask
     {
+        public int Id { get; init; }
+        public required string Alias { get; set; }
     }
 }
