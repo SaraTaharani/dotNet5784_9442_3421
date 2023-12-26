@@ -54,7 +54,7 @@ namespace DalTest
                     case 'c'://readAll
                         Console.WriteLine("the list of the engineers");
                         IEnumerable<Engineer?> listEngineers = s_dal!.Engineer!.ReadAll(); ;
-                        foreach (Engineer engineer in listEngineers) { Console.WriteLine(engineer); }
+                        foreach (Engineer? engineer in listEngineers) { Console.WriteLine(engineer); }
                         break;
                     case 'd'://update
                         Console.WriteLine("enter an id of engineer to update");
@@ -65,12 +65,12 @@ namespace DalTest
                         string emailUpdate = Console.ReadLine()!;
                         try
                         {
-                            Console.WriteLine("enter an engineer level between 0-2");
+                            Console.WriteLine("enter an engineer level between 0-4");
                             int? level = int.Parse(Console.ReadLine()!);
                             EngineerExperience levelUpdate;
                             bool b = Enum.TryParse<EngineerExperience>(level.ToString(), out levelUpdate);
                             if (!b)
-                                throw new LogicException("enter an engineer level between 0 - 2");
+                                throw new LogicException("enter an engineer level between 0 - 4");
                             EngineerExperience leveluUpdate = (EngineerExperience)level;
                             Console.WriteLine("enter cost of engineer to update");
                             int cost = int.Parse(Console.ReadLine()!);
