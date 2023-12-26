@@ -13,7 +13,7 @@ namespace BO
         public required string Alias { get; set; }
         public DateTime CreatedAtDate { get; set; }
         public Status Status { get; set; }
-        public MilestoneInTask? Milestone { get; set; }
+        public MilestoneTask? Milestone { get; set; }
         public DateTime? BaselineStartDate { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? ScheduledStartDate { get; set; }
