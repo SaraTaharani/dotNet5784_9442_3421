@@ -1,5 +1,5 @@
 ﻿namespace BlApi;
-public interface IBI
+public interface IBl
 {
     public ITask Task{ get; }
     public IMilestone Milestone { get; }

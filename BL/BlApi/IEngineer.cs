@@ -14,7 +14,7 @@ namespace BlApi
         public IEnumerable<BO.Engineer> ReadAll();//get all engineers
         public BO.Engineer? Raed(int id);//GET A SPECIFIX ENGINEER
 
-        public int Create(BO.Engineer item);//add new engineer
+        public int Create(BO.Engineer boEngineer);//add new engineer
        public void Update(BO.Engineer item);//update an engineer
        public void Delete(int id);//delete an engineer
 
