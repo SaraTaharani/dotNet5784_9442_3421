@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlApi
 {
-    internal interface ITask
+    public interface ITask
     {
         public int Create(BO.Task item);//Add a new task
         public IEnumerable<BO.Task> ReadAll();//Task list request
