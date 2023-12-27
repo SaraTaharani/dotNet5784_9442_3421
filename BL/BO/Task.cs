@@ -24,7 +24,6 @@ namespace BO
         public string? Remarks { get; set; }
         public EngineerInTask Engineer { get; set; }
         public EngineerExperience CopmlexityLevel { get; set; }
-        public List<TaskInList>? Dependencies { get; set; }
        // public override string ToString() => this.ToStringProperty();
     }
 }
