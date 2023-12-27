@@ -6,9 +6,16 @@ using System.Collections.Generic;
 internal class EngineerImplementation :IEngineer
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
-    public int Create(BO.Engineer boEngineer)
-    {
+    public int Create(BO.Engineer boEngineer)//add an engineer
+    {//validation
+        if (boEngineer.Id < 0)//if the id isnt valid
         throw new NotImplementedException();
+        if (boEngineer.Name =="")//if the name is empty
+            throw new NotImplementedException();
+        if (boEngineer.Cost < 0)//if the COST isnt valid
+            throw new NotImplementedException();
+       // if(boEngineer.Email) validate email
+
     }
 
     public void Delete(int id)

@@ -4,17 +4,17 @@ using BlApi;
 
 internal class MilestoneImplementation : IMilestone
 {
-    public int Create(Milestone item)
+    public int Create(BO.Milestone item)
     {
         throw new NotImplementedException();
     }
 
-    public Milestone? Read(int id)
+    public BO.Milestone? Read(int id)
     {
         throw new NotImplementedException();
     }
 
-    public void Update(Milestone item)
+    public void Update(BO.Milestone item)
     {
         throw new NotImplementedException();
     }
