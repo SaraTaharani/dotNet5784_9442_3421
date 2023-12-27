@@ -13,6 +13,7 @@ namespace BO
         public required string Email { get; set; }
         public EngineerExperience? Level { get; set; }
         public double Cost { get; set; }
-        public TaskInEngineer? Task {  get; set; }  
+        public TaskInEngineer? Task {  get; set; }
+        public override string ToString() => this.ToStringProperty();
     }
 }

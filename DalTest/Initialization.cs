@@ -1,6 +1,7 @@
 ﻿namespace DalTest;
 using DalApi;
 using DO;
+using System.ComponentModel;
 using System.Data.Common;
 using System.Xml.Linq;
 
@@ -43,11 +44,15 @@ public static class Initialization
             EngineerExperience _level = (EngineerExperience)s_rand.Next(0, Enum.GetValues<EngineerExperience>().Count());
             switch (_level)
             {
-                case EngineerExperience.expert: _cost = 400;
+                case EngineerExperience.Beginner: _cost = 400;
                     break;
-                case EngineerExperience.Jr:_cost = 300;
+                case EngineerExperience.AdvancedBeginner: _cost = 300;
                     break;
-                case EngineerExperience.rookie:_cost = 200;
+                case EngineerExperience.Competent:_cost = 200;
+                    break;
+                case EngineerExperience.Proficient:_cost = 200;
+                    break;
+                case EngineerExperience.Expert:_cost = 200;
                     break;
                 default:
                     break;

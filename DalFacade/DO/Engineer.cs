@@ -20,5 +20,5 @@ public record Engineer
     bool Active=true
 )
 {
-    public Engineer() : this(0, "", "",null, EngineerExperience.expert) { }
+    public Engineer() : this(0, "", "",null, EngineerExperience.Beginner) { }
 }
