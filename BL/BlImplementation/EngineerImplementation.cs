@@ -37,17 +37,5 @@ internal class EngineerImplementation :IEngineer
     {
         throw new NotImplementedException();
     }
-
-    
-
-    BO.Engineer? IEngineer.Raed(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    IEnumerable<BO.Engineer> IEngineer.ReadAll()
-    {
-        throw new NotImplementedException();
-    }
 }
 

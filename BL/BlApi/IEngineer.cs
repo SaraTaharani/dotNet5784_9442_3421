@@ -12,7 +12,7 @@ namespace BlApi
     public interface IEngineer
     {
         public IEnumerable<BO.Engineer> ReadAll();//get all engineers
-        public BO.Engineer? Raed(int id);//GET A SPECIFIX ENGINEER
+        public BO.Engineer? Read(int id);//GET A SPECIFIX ENGINEER
 
         public int Create(BO.Engineer boEngineer);//add new engineer
        public void Update(BO.Engineer item);//update an engineer

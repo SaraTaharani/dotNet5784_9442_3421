@@ -13,7 +13,7 @@ namespace BO
         public required string Alias { get; set; }
         public DateTime CreatedAtDate { get; set; }
         public Status Status { get; set; }
-        public MilestoneTask? Milestone { get; set; }
+        public MilestoneInTask? Milestone { get; set; }
         public DateTime? BaselineStartDate { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? ScheduledStartDate { get; set; }
@@ -22,7 +22,7 @@ namespace BO
         public DateTime? CompleteDate { get; set; }
         public string? Deliverables { get; set; }
         public string? Remarks { get; set; }
-        public EngineerInTask Engineer { get; set; }
+        public EngineerInTask? Engineer { get; set; }
         public EngineerExperience CopmlexityLevel { get; set; }
         public override string ToString() => this.ToStringProperty();
     }
