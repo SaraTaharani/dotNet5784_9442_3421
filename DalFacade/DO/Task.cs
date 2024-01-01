@@ -1,42 +1,40 @@
-﻿namespace DO;
+﻿
 
+namespace DO;
 /// <summary>
-/// An engineer's mission statement entity
+/// task entity represents a task with all its props
 /// </summary>
-/// <param name="Id">A unique identification number for the task</param>
-/// <param name="Description">Description of task</param>
-/// <param name="Alias">nickname of task</param>
-/// <param name="Milestone">Milestone of task</param>
-/// <param name="CreatedAt">Creation date of task</param>
-/// <param name="Start"> Start date of task</param>
-/// <param name="ForecastDate">Estimated date of completion of task</param>
-/// <param name="Deadline">Final date for completion of task</param>
-/// <param name="Complete">Actual end date of task</param>
-/// <param name="Deliverables">Product of task</param>
-/// <param name="Remarks">Notes for task</param>
-/// <param name="EngineerId">The ID of the engineer assigned to the task</param>
-/// <param name="">Difficulty level of task</param>
-public record Task
-(
-   int Id,
-    string? Description = null,
-    string? Alias = null,
-    bool? Milestone = null,
-    DateTime? CreatedAt = null,
-    DateTime? Start = null,
-    DateTime? ForecastDate = null,
-    DateTime? Deadline = null,
-    DateTime? Complete = null,
+/// <param name="id"> uniqe id for the task </param>
+/// <param name="description"> description of the task </param>
+/// <param name="alias"> short name of the task </param>
+/// <param name="milestone"> significant event or achievement that marks a key point in the progress of a task </param>
+/// <param name="ceratedAt"> date the task was created </param>
+/// <param name="start"> date the task started </param>
+/// <param name="scheduledDate">  scheduled date to finish the task </param>
+/// <param name="deadline"> deadline to finish the task </param>
+/// <param name="complete"> date the task was completed </param>
+/// <param name="deliverabels"> a string describing the deliverabels </param>
+/// <param name="remarks"> remarks about the task </param>
+/// <param name="engineerid"> id of the engineer </param>
+/// <param name="complexityLevel"> level of coplexity </param>
+
+public record Task(
+    int Id,
+    string Description,
+    string Alias,
+    int Engineerid,
+    EngineerExperience Complexity,
+    DateTime CeratedAtDate,//תאריך יצירת משימה
+    bool IsMilestone = false,
+    bool Active = true,//delete??
+    TimeSpan? RequiredEffortTime = null,
+    DateTime? StartDate = null,//תאריך התחלה
+    DateTime? ScheduledDate = null,//תאריך מתוכנן להתחלה
+    DateTime? DeadlineDate = null,//תאריך סיום אחרון אפשרי
+    DateTime? CompleteDate = null,//תאריך סיום
     string? Deliverables = null,
-    string? Remarks = null,
-    int? EngineerId = null,
-    EngineerExperience? ComlexityLevel = null,
-    bool Active = true
-)
-
-
+    string? Remarks = null
+    )
 {
-       public Task() : this(0) { }
-
+    public Task() : this(0, "", "", 0, 0, DateTime.Now) { }
 }
-

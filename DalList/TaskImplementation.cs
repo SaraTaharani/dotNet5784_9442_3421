@@ -26,7 +26,7 @@ internal class TaskImplementation : ITask
         return DataSource.Tasks.FirstOrDefault(task => filter(task!));
     }
     //Reads all entity objects
-    public IEnumerable<Task> ReadAll(Func<Task, bool>? filter = null)
+    public IEnumerable<Task?> ReadAll(Func<Task, bool>? filter = null)
     {
         if (filter != null)
         {
@@ -67,4 +67,5 @@ internal class TaskImplementation : ITask
             DataSource.Tasks.Clear(); 
         }  //reset the data source
     }
+
 }

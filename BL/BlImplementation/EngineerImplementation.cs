@@ -4,7 +4,7 @@ using BO;
 using System.Collections.Generic;
 
 
-internal class EngineerImplementation : IEngineer//למה זה אדום??????
+internal class EngineerImplementation : IEngineer
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
     public int Create(BO.Engineer boEngineer)//add an engineer
@@ -33,52 +33,49 @@ internal class EngineerImplementation : IEngineer//למה זה אדום??????
 
     public void Delete(int id)
     {
-        DO.Engineer? doEngineer = _dal.Engineer.Read(id);//create a dal engineer object
-        if (doEngineer == null)//if this engineer dosnt exist throwan exeption
-            throw new BO.BlDoesNotExistExeption($"Engineer with ID={id} does Not exist");
-        DO.Task? task = _dal.Task.ReadAll().FirstOrDefault(task => task?.EngineerId == id);//get the first task the engineer is in charge of it
-        if (task == null)//if the eng. can be delete
-        {
-            try
-            {
-                _dal.Engineer.Delete(id);//try to delete
-            }
-            catch(Exception ex ){
-                throw new BO.BlcantBeDelited("");//It is not possible to delete an engineer who has already finished performing a task or is actively performing a task
-            }
-        }
-        else
-        {
-            throw new BlcantBeDelited("the engineer is in charge of tasks so he cant be delited");
-        }
+        //לחכות לשלב 5 על פי הוראת המורה
+        //DO.Engineer? doEngineer = _dal.Engineer.Read(id);//create a dal engineer object
+        //if (doEngineer == null)//if this engineer dosnt exist throwan exeption
+        //    throw new BO.BlDoesNotExistExeption($"Engineer with ID={id} does Not exist");
+        //DO.Task? task = _dal.Task.ReadAll().FirstOrDefault(task => task?.EngineerId == id);//get the first task the engineer is in charge of it
+        //if (task == null)//if the eng. can be delete
+        //{
+        //    try
+        //    {
+        //        _dal.Engineer.Delete(id);//try to delete
+        //    }
+        //    catch(Exception ex ){
+        //        throw new BO.BlcantBeDelited("");//It is not possible to delete an engineer who has already finished performing a task or is actively performing a task
+        //    }
+        //}
+        //else
+        //{
+        //    throw new BlcantBeDelited("the engineer is in charge of tasks so he cant be delited");
+        //}
 
         
     }
-    /*לבדוק האם נכון לתפוס כאן חריגה*/
-    public BO.Engineer? Raed(int id)
-    {  //try
-        //{
-        //    DO.Engineer? doEngineer = _dal.Engineer.Read(id);//create a dal engineer object
-        //}
-        //catch (DO.DalDoesNotExistException ex)
-        //{
-        //    //  if (doEngineer == null)//if this engineer dosnt exist throwan exeption
-        //    throw new BO.BlDoesNotExistExeption($"Engineer with ID={id} does Not exist");
-        //}
-        DO.Engineer? doEngineer = _dal.Engineer.Read(id);//create a dal engineer object
-        if (doEngineer == null)//if this engineer dosnt exist throwan exeption
-            throw new BO.BlDoesNotExistExeption($"Engineer with ID={id} does Not exist");
-        DO.Task? task = _dal.Task.ReadAll().FirstOrDefault(task => task?.EngineerId == id);//get one of the tasks that this engineer is in charge of it
+    public BO.Engineer? Read(int id)
+    {
+        DO.Engineer? doEngineer;
+        try
+        {
+            doEngineer = _dal.Engineer.Read(id);//create a dal engineer object
+        }
+        catch (DO.DalDoesNotExistException ex)
+        {
+            throw new BO.BlDoesNotExistExeption(ex.Message);
+        }
+        DO.Task? task = _dal.Task.ReadAll().FirstOrDefault(task => task?.Engineerid == id);//get one of the tasks that this engineer is in charge of it
         return new BO.Engineer()//create the bl object for return
         {
             Id = id,
-            Name = doEngineer.Name,
+            Name = doEngineer!.Name,
             Email = doEngineer.Email,
             Level = (BO.EngineerExperience)doEngineer.Level!,
             Cost = (double)doEngineer.Cost!,
             Task = new BO.TaskInEngineer() { Id = task!.Id, Alias = task.Alias! },
         };
-
         throw new NotImplementedException();
     }
 
@@ -86,21 +83,20 @@ internal class EngineerImplementation : IEngineer//למה זה אדום??????
     {
         IEnumerable<BO.Engineer?> allEngineers =//create a list of all the engineers with linqToObject
             from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
-            let task= _dal.Task.ReadAll().FirstOrDefault(task => task?.EngineerId == doEngineer.Id)
+            let task = _dal.Task.ReadAll().FirstOrDefault(task => task?.Engineerid == doEngineer.Id)
             select new BO.Engineer()//create the objects in the list
-             {
-                 Id = doEngineer.Id,
-                 Name = doEngineer.Name,
-                 Email = doEngineer.Email,
-                 Level = (BO.EngineerExperience)doEngineer.Level!,
-                 Cost = (double)doEngineer.Cost!,
-                 Task = new BO.TaskInEngineer() 
-                 { Id = task!.Id, Alias = task.Alias! },
-             };
-            if (filter == null)
+            {
+                Id = doEngineer.Id,
+                Name = doEngineer.Name,
+                Email = doEngineer.Email,
+                Level = (BO.EngineerExperience)doEngineer.Level!,
+                Cost = (double)doEngineer.Cost!,
+                Task = new BO.TaskInEngineer()
+                { Id = task!.Id, Alias = task.Alias! },
+            };
+        if (filter == null)
             return allEngineers!;
         return allEngineers.Where(filter!)!;//Filter by function
-
     }
 
     public void Update(BO.Engineer boEngineer)
@@ -118,11 +114,10 @@ internal class EngineerImplementation : IEngineer//למה זה אדום??????
         try//chekcing if the engineer who added is alredy exist
         {
             _dal.Engineer.Update(doEngineer);
-            
         }
         catch (DO.DalDoesNotExistException ex)//catch the exeption from Dal and   throw the exeption from Bl
         {
-            throw new BO.BlDoesNotExistExeption($"Engineer with ID={doEngineer.Id} dousnt exists");
+            throw new BO.BlDoesNotExistExeption(ex.Message);
         }
     }
 }

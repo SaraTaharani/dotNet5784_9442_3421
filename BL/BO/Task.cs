@@ -11,6 +11,7 @@ namespace BO
         public int Id { get; init; }
         public required string Description { get; set; }
         public required string Alias { get; set; }
+        public TaskInList? DependenciesList { get; set; }
         public DateTime CreatedAtDate { get; set; }
         public Status Status { get; set; }
         public MilestoneInTask? Milestone { get; set; }

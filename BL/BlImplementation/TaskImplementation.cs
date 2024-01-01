@@ -13,6 +13,23 @@ using System.Collections.Generic;
 internal class TaskImplementation : ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
+    private BO.TaskInList? CalculationOfDependencies(int id)
+    {
+        return null;
+    }
+    private BO.Status CalculationOfStatus(DO.Task task)
+    {
+        if (task.StartDate == null || task.ScheduledDate==null)//case that the task doesnt have a start date
+            return (BO.Status)0;
+        else if(task.ScheduledDate!=null && task.StartDate==null)//case that the task has a date of start in  the scedualed but still doesnt have a start date
+            return (BO.Status)1;
+        else if (task.ScheduledDate != null && task.CompleteDate != null)//case that the task started but doesnt completed
+            return (BO.Status)2;
+        else if (task.CompleteDate==null && task.DeadlineDate < DateTime.Now)//case that the task need to be completed but didnt finish
+            return (BO.Status)3;
+        else 
+            return (BO.Status)4;//case that the task completed
+    }
     public int Create(BO.Task boTask)
     {
         if (boTask.Id <= 0)//check if the id is positive
@@ -20,21 +37,24 @@ internal class TaskImplementation : ITask
         if (boTask.Alias == "")//check if the user insert an alias
             throw new BO.BlNotValidInputException("The Alias must contain atleast one letter");
         DO.Task doTask =//Creating a task in the structure of DO
- new DO.Task(boTask.Id, boTask.Description,
-boTask.Description,
-            boTask.Alias,
-            boTask.Engineer!.Id,
-            (DO.EngineerExperience)boTask.CopmlexityLevel!,
-            boTask.CreatedAtDate,
-            false,
-            true,
-            (TimeSpan)(boTask.CompleteDate - boTask.StartDate)!,
-            boTask.StartDate,
-            boTask.BaselineStartDate,
-            boTask.DeadlineDate,
-            boTask.CompleteDate,
-            boTask.Deliverables,
-            boTask.Remarks); 
+ new DO.Task()
+ {
+     Id = boTask.Id,
+     Description = boTask.Description,
+     Alias = boTask.Alias,
+     Engineerid = boTask.Engineer!.Id,
+     Complexity = (DO.EngineerExperience)boTask.CopmlexityLevel!,
+     CeratedAtDate = boTask.CreatedAtDate,
+     IsMilestone = false,
+     Active = true,
+     RequiredEffortTime = (TimeSpan)(boTask.CompleteDate - boTask.StartDate)!,
+     StartDate = boTask.StartDate,
+     ScheduledDate = boTask.ScheduledStartDate,
+     DeadlineDate = boTask.DeadlineDate,
+     CompleteDate = boTask.CompleteDate,
+     Deliverables = boTask.Deliverables,
+     Remarks = boTask.Remarks
+ };
         try
         {
             int idTsk = _dal.Task.Create(doTask);
@@ -49,22 +69,41 @@ boTask.Description,
     public void Delete(int id)
     {
 
-
+        //לעשות לאחר שלב 5 על פי הוראת המורה
         //מה המשמעות המעשית של השורה הבאה: - - -שימו לב: אי אפשר למחוק משימות לאחר יצירת לו"ז הפרויקט.
         throw new NotImplementedException();
     }
 
     public BO.Task? Read(int id)
     {
-        DO.Task? doTask = _dal.Task.Read(id);
-        if (doTask == null)
-            throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
+        DO.Task? doTask;
+        try
+        {
+            doTask = _dal.Task.Read(id);//create a dal engineer object
+        }
+        catch (DO.DalDoesNotExistException ex)
+        {
+            throw new BO.BlDoesNotExistExeption(ex.Message);
+        }
         return new BO.Task()
         {
             Id = id,
-            Description = doTask.Description!,
-            Alias = doTask.Alias!,
-            CreatedAtDate = doTask.CreatedAt ?? DateTime.MinValue,
+            Description = doTask!.Description,
+            Alias = doTask.Alias,
+            CreatedAtDate = doTask.CeratedAtDate,
+            Status =CalculationOfStatus(doTask), //Calculation Of Status by a function
+            DependenciesList =//פונקקציה שתחשב את רשימת התלויות
+            Milestone = //פונקציה שיוצרת אבן דרך מתאימה למשימה
+            BaselineStartDate = doTask.ScheduledDate,
+            StartDate = doTask.StartDate,
+            ForecastDate = doTask.StartDate + doTask.RequiredEffortTime,
+            DeadlineDate = doTask.DeadlineDate,
+            CompleteDate = doTask.CompleteDate,
+            Deliverables = doTask.Deliverables,
+            Remarks = doTask.Remarks,
+            Engineer =//פונקציה שתכין אוביקט של מהנדס במשימה 
+            CopmlexityLevel = (BO.EngineerExperience)doTask.Complexity
+
 
         };
 
@@ -74,46 +113,41 @@ boTask.Description,
     {
         IEnumerable<BO.Task?> allTasks =//create a list of all the engineers with linqToObject
             from DO.Task doTask in _dal.Task.ReadAll()
-         
+
             select new BO.Task()//create the objects in the list
             {
                 Id = doTask.Id,
                 Description = doTask.Description!,
                 Alias = doTask.Alias!,
-                CreatedAtDate = doTask.CreatedAt ?? DateTime.MinValue,
+                CreatedAtDate = doTask.CeratedAtDate,
             };
         if (filter == null)
             return allTasks!;
         return allTasks.Where(filter!)!;//Filter by function
-
-
-
     }
 
-    public void Update( BO.Task boTask)
+    public void Update(BO.Task boTask)
     {
-
         if (boTask.Id <= 0)//check if the id is positive
             throw new BO.BlNotValidInputException("The id must be positive");
         if (boTask.Alias == "")//check if the user insert an alias
             throw new BO.BlNotValidInputException("The Alias must contain atleast one letter");
         DO.Task doTask = new DO.Task
         {
-            Id = boTask.Id, 
+            Id = boTask.Id,
             Description = boTask.Description,
             Alias = boTask.Alias,
-               
-        }//Creating a task in the structure of DO
+
+        };//Creating a task in the structure of DO
         try
         {
             _dal.Task.Update(doTask);
         }
 
-        catch(Exception ex)
+        catch (Exception ex)
         {
             throw new BO.BlDoesNotExistExeption($"Engineer with ID={doTask.Id} dousnt exists");
         }
-
     }
 }
 /*קוד 
