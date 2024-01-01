@@ -4,6 +4,8 @@ using BO;
 using DalApi;
 using DO;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+
 /*שאלות למורה:
 
  1.האם זה נכון מה שעשיתי ששלחתי רק חלק מהתכונות או שצריך לשלוח את הכל?
@@ -17,7 +19,7 @@ internal class TaskImplementation : ITask
     private DalApi.IDal _dal = DalApi.Factory.Get;
     private IEnumerable<BO.TaskInList>? CalculationOfDependencies(int id)
     {
-        IEnumerable<DO.Dependency?> allDependencies =_dal.Dependency.ReadAll(dependency => dependency?.DependsOnTask == id);//create a list of all the dependencies of the task with the id that the function get 
+        IEnumerable<DO.Dependency?> allDependencies = _dal.Dependency.ReadAll(dependency => dependency?.DependsOnTask == id);//create a list of all the dependencies of the task with the id that the function get 
         IEnumerable<BO.TaskInList> listOfTasksInList = //create a list of all the Tasks with linqToObject
             from DO.Task doTask in allDependencies
             select new BO.TaskInList()//create the objects in the list
@@ -28,9 +30,9 @@ internal class TaskImplementation : ITask
                 Status = CalculationOfStatus(doTask)
             };
         return listOfTasksInList;
-   
+    }
 
-    private BO.EngineerInTask? calculateEngineer(DO.Task doTask)
+    private BO.EngineerInTask? CalculateEngineer(DO.Task doTask)
     {
         int engineerId = doTask.EngineerId;
         return new BO.EngineerInTask()
@@ -38,6 +40,10 @@ internal class TaskImplementation : ITask
             Id = engineerId,
             Name = _dal.Engineer.Read(engineerId)!.Name,
         };
+    }
+    private BO.MilestoneInTask? CalculationOfMilestone(DO.Task doTask)
+    {
+        return null;
     }
     private BO.Status CalculationOfStatus(DO.Task task)
     {
@@ -114,10 +120,8 @@ internal class TaskImplementation : ITask
             Alias = doTask.Alias,
             CreatedAtDate = doTask.CeratedAtDate,
             Status =CalculationOfStatus(doTask), //Calculation Of Status by a function
-            DependenciesList =//פונקקציה שתחשב את רשימת התלויות
-            Milestone =       //פונקציה שיוצרת אבן דרך מתאימה למשימה
             DependenciesList = CalculationOfDependencies(id),//A function that return a list of the dependencies
-            Milestone = //פונקציה שיוצרת אבן דרך מתאימה למשימה
+            Milestone = CalculationOfMilestone(doTask),//פונקציה שיוצרת אבן דרך מתאימה למשימה
             BaselineStartDate = doTask.ScheduledDate,
             StartDate = doTask.StartDate,
             ForecastDate = doTask.StartDate + doTask.RequiredEffortTime,
@@ -125,10 +129,8 @@ internal class TaskImplementation : ITask
             CompleteDate = doTask.CompleteDate,
             Deliverables = doTask.Deliverables,
             Remarks = doTask.Remarks,
-            Engineer =//פונקציה שתכין אוביקט של מהנדס במשימה 
+            Engineer = CalculateEngineer(doTask),//A function that will prepare an engineer object in the task 
             CopmlexityLevel = (BO.EngineerExperience)doTask.Complexity
-
-
         };
 
     }
@@ -166,10 +168,9 @@ internal class TaskImplementation : ITask
         {
             _dal.Task.Update(doTask);
         }
-
         catch (Exception ex)
         {
-            throw new BO.BlDoesNotExistExeption($"Engineer with ID={doTask.Id} dousnt exists");
+            throw new BO.BlDoesNotExistExeption(ex.Message);
         }
     }
 }
