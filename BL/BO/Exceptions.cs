@@ -4,17 +4,31 @@
 public class BlDoesNotExistException : Exception
 {
     public BlDoesNotExistException(string? message) : base(message) { }
+    public BlDoesNotExistException(string message, Exception innerException)
+                : base(message, innerException) { }
 }
 [Serializable]
 
 public class BlNotValidInputException : Exception
 {
     public BlNotValidInputException(string? message) : base(message) { }
+    public BlNotValidInputException(string message, Exception innerException)
+                : base(message, innerException) { }
+}
+[Serializable]
+
+public class BlNotCorectDate : Exception
+{
+    public BlNotCorectDate(string? message) : base(message) { }
+    public BlNotCorectDate(string message, Exception innerException)
+                : base(message, innerException) { }
 }
 [Serializable]
 public class BlAlreadyExistsException : Exception
 {
-    public BlAlreadyExistsException(string? message, Exception ex) : base(message) { }
+    public BlAlreadyExistsException(string? message) : base(message) { }
+    public BlAlreadyExistsException(string message, Exception innerException)
+                    : base(message, innerException) { }
 }
 
 
@@ -22,12 +36,9 @@ public class BlAlreadyExistsException : Exception
 public class BlDoesNotExistExeption : Exception
 {
     public BlDoesNotExistExeption(string? message) : base(message) { }
+    public BlDoesNotExistExeption(string message, Exception innerException)
+                   : base(message, innerException) { }
 }
 
-//[Serializable]
-//public class BlcantBeDelited : Exception
-//{
-//    public BlcantBeDelited(string? message) : base(message) { }
-//}
 
 
