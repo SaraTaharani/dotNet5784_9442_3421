@@ -22,7 +22,7 @@ public record Task(
     int Id,
     string Description,
     string Alias,
-    int Engineerid,
+    int EngineerId,
     EngineerExperience Complexity,
     DateTime CeratedAtDate,//תאריך יצירת משימה
     bool IsMilestone = false,

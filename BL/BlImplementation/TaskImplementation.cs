@@ -42,7 +42,7 @@ internal class TaskImplementation : ITask
      Id = boTask.Id,
      Description = boTask.Description,
      Alias = boTask.Alias,
-     Engineerid = boTask.Engineer!.Id,
+     EngineerId = boTask.Engineer!.Id,
      Complexity = (DO.EngineerExperience)boTask.CopmlexityLevel!,
      CeratedAtDate = boTask.CreatedAtDate,
      IsMilestone = false,
