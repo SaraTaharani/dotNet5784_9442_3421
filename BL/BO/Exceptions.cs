@@ -24,10 +24,10 @@ public class BlDoesNotExistExeption : Exception
     public BlDoesNotExistExeption(string? message) : base(message) { }
 }
 
-[Serializable]
-public class BlcantBeDelited : Exception
-{
-    public BlcantBeDelited(string? message) : base(message) { }
-}
+//[Serializable]
+//public class BlcantBeDelited : Exception
+//{
+//    public BlcantBeDelited(string? message) : base(message) { }
+//}
 
 

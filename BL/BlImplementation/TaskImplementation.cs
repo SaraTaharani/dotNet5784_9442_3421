@@ -1,6 +1,8 @@
 ﻿namespace BlImplementation;
 using BlApi;
 using BO;
+using DalApi;
+using DO;
 using System.Collections.Generic;
 /*שאלות למורה:
 
@@ -13,9 +15,19 @@ using System.Collections.Generic;
 internal class TaskImplementation : ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
-    private BO.TaskInList? CalculationOfDependencies(int id)
+    private IEnumerable<BO.TaskInList>? CalculationOfDependencies(int id)
     {
-        return null;
+        IEnumerable<DO.Dependency?> allDependencies =_dal.Dependency.ReadAll(dependency => dependency?.DependsOnTask == id);//create a list of all the dependencies of the task with the id that the function get 
+        IEnumerable<BO.TaskInList> listOfTasksInList = //create a list of all the Tasks with linqToObject
+            from DO.Task doTask in allDependencies
+            select new BO.TaskInList()//create the objects in the list
+            {
+                Id = doTask.Id,
+                Description = doTask.Description!,
+                Alias = doTask.Alias!,
+                Status = CalculationOfStatus(doTask)
+            };
+        return listOfTasksInList;
     }
     private BO.Status CalculationOfStatus(DO.Task task)
     {
@@ -92,7 +104,7 @@ internal class TaskImplementation : ITask
             Alias = doTask.Alias,
             CreatedAtDate = doTask.CeratedAtDate,
             Status =CalculationOfStatus(doTask), //Calculation Of Status by a function
-            DependenciesList =//פונקקציה שתחשב את רשימת התלויות
+            DependenciesList = CalculationOfDependencies(id),//A function that return a list of the dependencies
             Milestone = //פונקציה שיוצרת אבן דרך מתאימה למשימה
             BaselineStartDate = doTask.ScheduledDate,
             StartDate = doTask.StartDate,
@@ -113,7 +125,6 @@ internal class TaskImplementation : ITask
     {
         IEnumerable<BO.Task?> allTasks =//create a list of all the engineers with linqToObject
             from DO.Task doTask in _dal.Task.ReadAll()
-
             select new BO.Task()//create the objects in the list
             {
                 Id = doTask.Id,

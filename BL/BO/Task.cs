@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace BO
         public int Id { get; init; }
         public required string Description { get; set; }
         public required string Alias { get; set; }
-        public TaskInList? DependenciesList { get; set; }
+        public IEnumerable<BO.TaskInList>? DependenciesList { get; set; }
         public DateTime CreatedAtDate { get; set; }
         public Status Status { get; set; }
         public MilestoneInTask? Milestone { get; set; }
