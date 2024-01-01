@@ -28,6 +28,16 @@ internal class TaskImplementation : ITask
                 Status = CalculationOfStatus(doTask)
             };
         return listOfTasksInList;
+   
+
+    private BO.EngineerInTask? calculateEngineer(DO.Task doTask)
+    {
+        int engineerId = doTask.EngineerId;
+        return new BO.EngineerInTask()
+        {
+            Id = engineerId,
+            Name = _dal.Engineer.Read(engineerId)!.Name,
+        };
     }
     private BO.Status CalculationOfStatus(DO.Task task)
     {
@@ -104,6 +114,8 @@ internal class TaskImplementation : ITask
             Alias = doTask.Alias,
             CreatedAtDate = doTask.CeratedAtDate,
             Status =CalculationOfStatus(doTask), //Calculation Of Status by a function
+            DependenciesList =//פונקקציה שתחשב את רשימת התלויות
+            Milestone =       //פונקציה שיוצרת אבן דרך מתאימה למשימה
             DependenciesList = CalculationOfDependencies(id),//A function that return a list of the dependencies
             Milestone = //פונקציה שיוצרת אבן דרך מתאימה למשימה
             BaselineStartDate = doTask.ScheduledDate,
