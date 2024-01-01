@@ -83,7 +83,7 @@ internal class EngineerImplementation : IEngineer
     {
         IEnumerable<BO.Engineer?> allEngineers =//create a list of all the engineers with linqToObject
             from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
-            let task = _dal.Task.ReadAll().FirstOrDefault(task => task?.Engineerid == doEngineer.Id)
+            let task = _dal.Task.ReadAll().FirstOrDefault(task => task?.EngineerId == doEngineer.Id)
             select new BO.Engineer()//create the objects in the list
             {
                 Id = doEngineer.Id,

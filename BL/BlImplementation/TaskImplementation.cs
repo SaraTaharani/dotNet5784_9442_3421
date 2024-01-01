@@ -6,32 +6,35 @@ using DO;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-/*שאלות למורה:
-
- 1.האם זה נכון מה שעשיתי ששלחתי רק חלק מהתכונות או שצריך לשלוח את הכל?
-2. למה יש שגיאה ביצירה שך TASK בקריאט?
-3 למה הכותרת של המלקה לא טובה*
-4. מה זה כל הפונקציות למטה?
-מה השימוש שלהם?
+/*מה עוד נשאר?
+*פונקציה שמחשבת אבן דרך בשביל אובייקט BOTask
+*
 */
 internal class TaskImplementation : ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
+    //Help functions
     private IEnumerable<BO.TaskInList>? CalculationOfDependencies(int id)
     {
-        IEnumerable<DO.Dependency?> allDependencies = _dal.Dependency.ReadAll(dependency => dependency?.DependsOnTask == id);//create a list of all the dependencies of the task with the id that the function get 
+        IEnumerable<DO.Dependency?> allDependencies = _dal.Dependency.ReadAll(dependency => dependency?.DependentTask == id);//create a list of all the dependencies of the task with the id that the function get 
+        IEnumerable<DO.Task?> allTasks;
+        foreach (DO.Dependency? dependency in allDependencies )
+        {
+            allTask.Add( _dal.Task.Read((int)dependency?.DependentTask!));//אני רוצה ליצור פה רשימה של משימות שהמשימה הזו תלויה בהם
+        }
+
+        //from DO.Task doTask in _dal.Task.ReadAll(task=> task?.Id == allDependencies.FirstOrDefault())
         IEnumerable<BO.TaskInList> listOfTasksInList = //create a list of all the Tasks with linqToObject
-            from DO.Task doTask in allDependencies
-            select new BO.TaskInList()//create the objects in the list
+         from DO.Task doTask in allTasks//עבור כל משימה ברשימת המשימות ניצור אוביקט 
+        select new BO.TaskInList()//create the objects in the list
             {
                 Id = doTask.Id,
                 Description = doTask.Description!,
                 Alias = doTask.Alias!,
                 Status = CalculationOfStatus(doTask)
             };
-        return listOfTasksInList;
+        return listOfTasksInList;//מחזיר את רשימת כל המשימות 
     }
-
     private BO.EngineerInTask? CalculateEngineer(DO.Task doTask)
     {
         int engineerId = doTask.EngineerId;
@@ -58,6 +61,7 @@ internal class TaskImplementation : ITask
         else 
             return (BO.Status)4;//case that the task completed
     }
+    //CRUD functions
     public int Create(BO.Task boTask)
     {
         if (boTask.Id <= 0)//check if the id is positive
@@ -93,15 +97,6 @@ internal class TaskImplementation : ITask
             throw new BO.BlAlreadyExistsException($"Task with ID={boTask.Id} already exists", ex);
         }
     }
-
-    public void Delete(int id)
-    {
-
-        //לעשות לאחר שלב 5 על פי הוראת המורה
-        //מה המשמעות המעשית של השורה הבאה: - - -שימו לב: אי אפשר למחוק משימות לאחר יצירת לו"ז הפרויקט.
-        throw new NotImplementedException();
-    }
-
     public BO.Task? Read(int id)
     {
         DO.Task? doTask;
@@ -134,7 +129,6 @@ internal class TaskImplementation : ITask
         };
 
     }
-
     public IEnumerable<BO.Task> ReadAll(Func<BO.Task, bool>? filter = null)
     {
         IEnumerable<BO.Task?> allTasks =//create a list of all the engineers with linqToObject
@@ -150,7 +144,6 @@ internal class TaskImplementation : ITask
             return allTasks!;
         return allTasks.Where(filter!)!;//Filter by function
     }
-
     public void Update(BO.Task boTask)
     {
         if (boTask.Id <= 0)//check if the id is positive
@@ -172,6 +165,13 @@ internal class TaskImplementation : ITask
         {
             throw new BO.BlDoesNotExistExeption(ex.Message);
         }
+    }
+    public void Delete(int id)
+    {
+
+        //לעשות לאחר שלב 5 על פי הוראת המורה
+        //מה המשמעות המעשית של השורה הבאה: - - -שימו לב: אי אפשר למחוק משימות לאחר יצירת לו"ז הפרויקט.
+        throw new NotImplementedException();
     }
 }
 /*קוד 
