@@ -13,9 +13,16 @@ using System.Collections.Generic;
 internal class TaskImplementation : ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
-    private BO.TaskInList? CalculationOfDependencies(int id)
+   
+
+    private BO.EngineerInTask? calculateEngineer(DO.Task doTask)
     {
-        return null;
+        int engineerId = doTask.EngineerId;
+        return new BO.EngineerInTask()
+        {
+            Id = engineerId,
+            Name = _dal.Engineer.Read(engineerId)!.Name,
+        };
     }
     private BO.Status CalculationOfStatus(DO.Task task)
     {
@@ -93,7 +100,7 @@ internal class TaskImplementation : ITask
             CreatedAtDate = doTask.CeratedAtDate,
             Status =CalculationOfStatus(doTask), //Calculation Of Status by a function
             DependenciesList =//פונקקציה שתחשב את רשימת התלויות
-            Milestone = //פונקציה שיוצרת אבן דרך מתאימה למשימה
+            Milestone =       //פונקציה שיוצרת אבן דרך מתאימה למשימה
             BaselineStartDate = doTask.ScheduledDate,
             StartDate = doTask.StartDate,
             ForecastDate = doTask.StartDate + doTask.RequiredEffortTime,
