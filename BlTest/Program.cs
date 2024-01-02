@@ -1,15 +1,9 @@
-﻿//// See https://aka.ms/new-console-template for more information
-//Console.WriteLine("Hello, World!");
-
-
-
-namespace BlTest
+﻿namespace BlTest
 {
     internal class Program
     {
-
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-        public static void CRUDEngineer()
+        public static void BOEngineer()
         {
             char choose;
             do
@@ -24,74 +18,81 @@ namespace BlTest
                         string name = Console.ReadLine()!;
                         Console.WriteLine("enter an email");
                         string email = Console.ReadLine()!;
-                        Console.WriteLine("enter the cost");
-                        double cost = double.Parse(Console.ReadLine()!);
-
-                        BO.Engineer newEngineer = new BO.Engineer()
-                        { id, name, email, cost };
-                        try
-                        {
-                            int ans = s_bl!.Engineer!.Create(newEngineer);
-                            Console.WriteLine("the engineer was addad");
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex.ToString());
-                        }
-                        break;
-                    case 'b'://read
-                        Console.WriteLine("enter id of engineer to read");
-                        int idRead = int.Parse(Console.ReadLine()!);
-                        try
-                        {
-                            Console.WriteLine(s_dal!.Engineer!.Read(idRead));
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex.ToString());
-                        }
-                        break;
-                    case 'c'://readAll
-                        Console.WriteLine("the list of the engineers");
-                        IEnumerable<Engineer?> listEngineers = s_dal!.Engineer!.ReadAll(); ;
-                        foreach (Engineer? engineer in listEngineers) { Console.WriteLine(engineer); }
-                        break;
-                    case 'd'://update
-                        Console.WriteLine("enter an id of engineer to update");
-                        int idUpdate = int.Parse(Console.ReadLine()!);
-                        Console.WriteLine("enter a name of engineer to update");
-                        string nameUpdate = Console.ReadLine()!;
-                        Console.WriteLine("enter a email of engineer to update");
-                        string emailUpdate = Console.ReadLine()!;
                         try
                         {
                             Console.WriteLine("enter an engineer level between 0-4");
                             int? level = int.Parse(Console.ReadLine()!);
-                            EngineerExperience levelUpdate;
+                          BO.EngineerExperience levelUpdate;
                             bool b = Enum.TryParse<EngineerExperience>(level.ToString(), out levelUpdate);
                             if (!b)
-                                throw new LogicException("enter an engineer level between 0 - 4");
+                                throw new BlLogicException("enter an engineer level between 0 - 4");
                             EngineerExperience leveluUpdate = (EngineerExperience)level;
                             Console.WriteLine("enter cost of engineer to update");
                             int cost = int.Parse(Console.ReadLine()!);
-                            Engineer updateEngineer = new(idUpdate, nameUpdate, emailUpdate, cost, levelUpdate);
-                            s_dal!.Engineer!.Update(updateEngineer);
+                            BO.Engineer newEngineer = new BO.Engineer()
+                        { id, name, email, level, cost };
+                            int ans = s_bl!.Engineer!.Create(newEngineer);
+                            Console.WriteLine("the engineer was added");
                         }
-                        catch (Exception ex) { Console.WriteLine(ex.ToString()); }
-                        break;
-                    case 'e'://delete
-                        Console.WriteLine("enter id of en engineer to delete");
-                        int idDelete = int.Parse(Console.ReadLine()!);
-                        try
+                        catch (Exception ex)
                         {
-                            s_dal!.Engineer!.Delete(idDelete);
+                            Console.WriteLine(ex.ToString());
                         }
-                        catch (Exception ex) { Console.WriteLine(ex.ToString()); }
-                        break;
+                    break;
+                    case 'b'://read
+                    Console.WriteLine("enter id of engineer to read");
+                    int idRead = int.Parse(Console.ReadLine()!);
+                    try
+                    {
+                        Console.WriteLine(s_dal!.Engineer!.Read(idRead));
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.ToString());
+                    }
+                    break;
+                case 'c'://readAll
+                    Console.WriteLine("the list of the engineers");
+                    IEnumerable<Engineer?> listEngineers = s_dal!.Engineer!.ReadAll(); ;
+                    foreach (Engineer? engineer in listEngineers) { Console.WriteLine(engineer); }
+                    break;
+                case 'd'://update
+                    Console.WriteLine("enter an id of engineer to update");
+                    int idUpdate = int.Parse(Console.ReadLine()!);
+                    Console.WriteLine("enter a name of engineer to update");
+                    string nameUpdate = Console.ReadLine()!;
+                    Console.WriteLine("enter a email of engineer to update");
+                    string emailUpdate = Console.ReadLine()!;
+                    try
+                    {
+                        Console.WriteLine("enter an engineer level between 0-4");
+                        int? level = int.Parse(Console.ReadLine()!);
+                        EngineerExperience levelUpdate;
+                        bool b = Enum.TryParse<EngineerExperience>(level.ToString(), out levelUpdate);
+                        if (!b)
+                            throw new LogicException("enter an engineer level between 0 - 4");
+                        EngineerExperience levelUpdate = (EngineerExperience)level;
+                        Console.WriteLine("enter cost of engineer to update");
+                        int cost = int.Parse(Console.ReadLine()!);
+                        Engineer updateEngineer = new(idUpdate, nameUpdate, emailUpdate, cost, levelUpdate);
+                        s_dal!.Engineer!.Update(updateEngineer);
+                    }
+                    catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+                    break;
+                case 'e'://delete
+                    Console.WriteLine("enter id of en engineer to delete");
+                    int idDelete = int.Parse(Console.ReadLine()!);
+                    try
+                    {
+                        s_dal!.Engineer!.Delete(idDelete);
+                    }
+                    catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+                    break;
                 }
             }
             while (choose != 'f');
         }
+
         public static char submenu(string type)
         {
             Console.WriteLine("for add a " + type + " press a");
@@ -104,11 +105,8 @@ namespace BlTest
             return choose;
         }
 
-
-
-
-
-        static void Main(string[] args) {
+        static void Main(string[] args)
+        {
             int choose;
             Console.Write("Would you like to create Initial data? (Y/N)");
             string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
@@ -126,13 +124,13 @@ namespace BlTest
                     case 0:
                         break;
                     case 1:
-                        ();
+                        BOEngineer();
                         break;
                     case 2:
-                        ();
+                        BOTask();
                         break;
                     case 3:
-                        CRUDDepndency();
+                        BODepndency();
                         break;
                     default:
                         break;
@@ -144,4 +142,4 @@ namespace BlTest
 
         }
 
-}
+    }

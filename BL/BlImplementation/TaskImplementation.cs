@@ -7,11 +7,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 /*מה עוד נשאר?
-*לתקן את הפונקציה להבאת התלויות
 *לכתוב את הפונקציה לחישוב האבן דרך
 *לעשות את השורה הבאה בקריאייט:הוספת משימות קודמות מתוך רשימת המשימות הקיימת
-
-*
 */
 internal class TaskImplementation : ITask
 {
@@ -19,24 +16,22 @@ internal class TaskImplementation : ITask
     //Help functions
     private IEnumerable<BO.TaskInList>? CalculationOfDependencies(int id)
     {
-        IEnumerable<DO.Dependency?> allDependencies = _dal.Dependency.ReadAll(dependency => dependency?.DependentTask == id);//create a list of all the dependencies of the task with the id that the function get 
-        IEnumerable<DO.Task?> allTasks= new List<DO.Task>();
-        foreach (DO.Dependency? dependency in allDependencies )
+        List<DO.Dependency?> allDependencies = _dal.Dependency.ReadAll(dependency => dependency?.DependentTask == id).ToList();//create a list of all the dependencies of the task with the id that the function get 
+        List<DO.Task>? allTasks = null;
+        foreach (DO.Dependency? dependency in allDependencies)
         {
-            allTask.Add(_dal.Task.Read((int)dependency?.DependentTask!));//אני רוצה ליצור פה רשימה של משימות שהמשימה הזו תלויה בהם
+            allTasks?.Add(_dal.Task.Read((int)dependency?.DependentTask!)!);//Create a list of tasks that this task depends on
         }
-
-        //from DO.Task doTask in _dal.Task.ReadAll(task=> task?.Id == allDependencies.FirstOrDefault())
         IEnumerable<BO.TaskInList> listOfTasksInList = //create a list of all the Tasks with linqToObject
-         from DO.Task doTask in allTasks//עבור כל משימה ברשימת המשימות ניצור אוביקט 
-        select new BO.TaskInList()//create the objects in the list
+         from DO.Task doTask in allTasks!//For each task in the task list we will create an object
+         select new BO.TaskInList()//create the objects in the list
             {
                 Id = doTask.Id,
                 Description = doTask.Description!,
                 Alias = doTask.Alias!,
                 Status = CalculationOfStatus(doTask)
             };
-        return listOfTasksInList;//מחזיר את רשימת כל המשימות 
+        return listOfTasksInList;//Returns the list of all tasks 
     }
     private BO.EngineerInTask? CalculateEngineer(DO.Task doTask)
     {
@@ -53,13 +48,13 @@ internal class TaskImplementation : ITask
     }
     private BO.Status CalculationOfStatus(DO.Task task)
     {
-        if (task.StartDate == null || task.ScheduledDate==null)//case that the task doesnt have a start date
+        if (task.StartDate == null || task.ScheduledDate==null)//case that the task doesn't have a start date
             return (BO.Status)0;
-        else if(task.ScheduledDate!=null && task.StartDate==null)//case that the task has a date of start in  the scedualed but still doesnt have a start date
+        else if(task.ScheduledDate!=null && task.StartDate==null)//case that the task has a date of start in  the Scheduled but still doesn't have a start date
             return (BO.Status)1;
-        else if (task.ScheduledDate != null && task.CompleteDate != null)//case that the task started but doesnt completed
+        else if (task.ScheduledDate != null && task.CompleteDate != null)//case that the task started but doesn't completed
             return (BO.Status)2;
-        else if (task.CompleteDate==null && task.DeadlineDate < DateTime.Now)//case that the task need to be completed but didnt finish
+        else if (task.CompleteDate==null && task.DeadlineDate < DateTime.Now)//case that the task need to be completed but didn't finish
             return (BO.Status)3;
         else 
             return (BO.Status)4;//case that the task completed
