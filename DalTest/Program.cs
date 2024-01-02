@@ -144,7 +144,7 @@ namespace DalTest
                             Console.WriteLine("enter alias task");
                             string upalias = Console.ReadLine()!;
                          
-                            DO.Task upTask = new(idUpdate, updescription, upalias);
+                            DO.Task upTask = new DO.Task() {Id= }(idUpdate, updescription, upalias);
                             s_dal!.Task!.Update(upTask);
                         }
                         catch (Exception ex)
