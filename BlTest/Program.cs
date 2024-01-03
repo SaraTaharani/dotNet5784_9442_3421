@@ -22,15 +22,21 @@
                         {
                             Console.WriteLine("enter an engineer level between 0-4");
                             int? level = int.Parse(Console.ReadLine()!);
-                          BO.EngineerExperience levelUpdate;
-                            bool b = Enum.TryParse<EngineerExperience>(level.ToString(), out levelUpdate);
+                            BO.EngineerExperience levelEngineer;
+                            bool b = Enum.TryParse<BO.EngineerExperience>(level.ToString(), out levelEngineer);
                             if (!b)
-                                throw new BlLogicException("enter an engineer level between 0 - 4");
-                            EngineerExperience leveluUpdate = (EngineerExperience)level;
+                                throw new BO.BlLogicException("enter an engineer level between 0 - 4");
+                            BO.EngineerExperience leveluUpdate = (BO.EngineerExperience)level;
                             Console.WriteLine("enter cost of engineer to update");
                             int cost = int.Parse(Console.ReadLine()!);
                             BO.Engineer newEngineer = new BO.Engineer()
-                        { id, name, email, level, cost };
+                            {
+                                Id = id,
+                                Name = name,
+                                Email = email,
+                                Level = levelEngineer,
+                                Cost = cost
+                            };
                             int ans = s_bl!.Engineer!.Create(newEngineer);
                             Console.WriteLine("the engineer was added");
                         }
@@ -38,56 +44,56 @@
                         {
                             Console.WriteLine(ex.ToString());
                         }
-                    break;
+                        break;
                     case 'b'://read
-                    Console.WriteLine("enter id of engineer to read");
-                    int idRead = int.Parse(Console.ReadLine()!);
-                    try
-                    {
-                        Console.WriteLine(s_dal!.Engineer!.Read(idRead));
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.ToString());
-                    }
-                    break;
-                case 'c'://readAll
-                    Console.WriteLine("the list of the engineers");
-                    IEnumerable<Engineer?> listEngineers = s_dal!.Engineer!.ReadAll(); ;
-                    foreach (Engineer? engineer in listEngineers) { Console.WriteLine(engineer); }
-                    break;
-                case 'd'://update
-                    Console.WriteLine("enter an id of engineer to update");
-                    int idUpdate = int.Parse(Console.ReadLine()!);
-                    Console.WriteLine("enter a name of engineer to update");
-                    string nameUpdate = Console.ReadLine()!;
-                    Console.WriteLine("enter a email of engineer to update");
-                    string emailUpdate = Console.ReadLine()!;
-                    try
-                    {
-                        Console.WriteLine("enter an engineer level between 0-4");
-                        int? level = int.Parse(Console.ReadLine()!);
-                        EngineerExperience levelUpdate;
-                        bool b = Enum.TryParse<EngineerExperience>(level.ToString(), out levelUpdate);
-                        if (!b)
-                            throw new LogicException("enter an engineer level between 0 - 4");
-                        EngineerExperience levelUpdate = (EngineerExperience)level;
-                        Console.WriteLine("enter cost of engineer to update");
-                        int cost = int.Parse(Console.ReadLine()!);
-                        Engineer updateEngineer = new(idUpdate, nameUpdate, emailUpdate, cost, levelUpdate);
-                        s_dal!.Engineer!.Update(updateEngineer);
-                    }
-                    catch (Exception ex) { Console.WriteLine(ex.ToString()); }
-                    break;
-                case 'e'://delete
-                    Console.WriteLine("enter id of en engineer to delete");
-                    int idDelete = int.Parse(Console.ReadLine()!);
-                    try
-                    {
-                        s_dal!.Engineer!.Delete(idDelete);
-                    }
-                    catch (Exception ex) { Console.WriteLine(ex.ToString()); }
-                    break;
+                        Console.WriteLine("enter id of engineer to read");
+                        int idRead = int.Parse(Console.ReadLine()!);
+                        try
+                        {
+                            Console.WriteLine(s_bl!.Engineer!.Read(idRead));
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.ToString());
+                        }
+                        break;
+                    case 'c'://readAll
+                        Console.WriteLine("the list of the engineers");
+                        IEnumerable<Engineer?> listEngineers = s_dal!.Engineer!.ReadAll(); ;
+                        foreach (Engineer? engineer in listEngineers) { Console.WriteLine(engineer); }
+                        break;
+                    case 'd'://update
+                        Console.WriteLine("enter an id of engineer to update");
+                        int idUpdate = int.Parse(Console.ReadLine()!);
+                        Console.WriteLine("enter a name of engineer to update");
+                        string nameUpdate = Console.ReadLine()!;
+                        Console.WriteLine("enter a email of engineer to update");
+                        string emailUpdate = Console.ReadLine()!;
+                        try
+                        {
+                            Console.WriteLine("enter an engineer level between 0-4");
+                            int? level = int.Parse(Console.ReadLine()!);
+                            EngineerExperience levelUpdate;
+                            bool b = Enum.TryParse<EngineerExperience>(level.ToString(), out levelUpdate);
+                            if (!b)
+                                throw new LogicException("enter an engineer level between 0 - 4");
+                            EngineerExperience levelUpdate = (EngineerExperience)level;
+                            Console.WriteLine("enter cost of engineer to update");
+                            int cost = int.Parse(Console.ReadLine()!);
+                            Engineer updateEngineer = new(idUpdate, nameUpdate, emailUpdate, cost, levelUpdate);
+                            s_dal!.Engineer!.Update(updateEngineer);
+                        }
+                        catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+                        break;
+                    case 'e'://delete
+                        Console.WriteLine("enter id of en engineer to delete");
+                        int idDelete = int.Parse(Console.ReadLine()!);
+                        try
+                        {
+                            s_dal!.Engineer!.Delete(idDelete);
+                        }
+                        catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+                        break;
                 }
             }
             while (choose != 'f');
@@ -143,3 +149,4 @@
         }
 
     }
+}

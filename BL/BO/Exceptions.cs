@@ -1,6 +1,7 @@
 ﻿namespace BO;
-[Serializable]
 
+//Convert dal exeptions to bl exeptions
+[Serializable]
 public class BlDoesNotExistException : Exception
 {
     public BlDoesNotExistException(string? message) : base(message) { }
@@ -8,7 +9,6 @@ public class BlDoesNotExistException : Exception
                 : base(message, innerException) { }
 }
 [Serializable]
-
 public class BlNotValidInputException : Exception
 {
     public BlNotValidInputException(string? message) : base(message) { }
@@ -16,7 +16,6 @@ public class BlNotValidInputException : Exception
                 : base(message, innerException) { }
 }
 [Serializable]
-
 public class BlNotCorectDate : Exception
 {
     public BlNotCorectDate(string? message) : base(message) { }
@@ -39,6 +38,12 @@ public class BlDoesNotExistExeption : Exception
     public BlDoesNotExistExeption(string message, Exception innerException)
                    : base(message, innerException) { }
 }
+//Programs exeptions
+[Serializable]
+public class BlLogicException : Exception
+{
+    public BlLogicException(string? message) : base(message) { }
 
+}
 
 

@@ -3,11 +3,12 @@ using BlApi;
 using BO;
 
 using DO;
+using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 /*מה עוד נשאר?
-*לכתוב את הפונקציה לחישוב האבן דרך
 *לעשות את השורה הבאה בקריאייט:הוספת משימות קודמות מתוך רשימת המשימות הקיימת
 */
 internal class TaskImplementation : ITask
@@ -16,12 +17,8 @@ internal class TaskImplementation : ITask
     //Help functions
     private IEnumerable<BO.TaskInList>? CalculationOfDependencies(int id)
     {
-        List<DO.Dependency?> allDependencies = _dal.Dependency.ReadAll(dependency => dependency?.DependentTask == id).ToList();//create a list of all the dependencies of the task with the id that the function get 
-        List<DO.Task>? allTasks = null;
-        foreach (DO.Dependency? dependency in allDependencies)
-        {
-            allTasks?.Add(_dal.Task.Read((int)dependency?.DependentTask!)!);//Create a list of tasks that this task depends on
-        }
+        IEnumerable<DO.Dependency?> allDependencies = _dal.Dependency.ReadAll(dependency => dependency?.DependentTask == id).ToList();//create a list of all the dependencies of the task with the id that the function get 
+        IEnumerable<DO.Task>? allTasks = allDependencies.Select(dependency=> _dal.Task.Read((int)dependency?.DependentTask!)!);//לבדוק שזה עובד
         IEnumerable<BO.TaskInList> listOfTasksInList = //create a list of all the Tasks with linqToObject
          from DO.Task doTask in allTasks!//For each task in the task list we will create an object
          select new BO.TaskInList()//create the objects in the list

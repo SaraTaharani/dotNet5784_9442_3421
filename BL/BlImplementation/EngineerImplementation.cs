@@ -66,7 +66,7 @@ internal class EngineerImplementation : IEngineer
         {
             throw new BO.BlDoesNotExistExeption(ex.Message);
         }
-        DO.Task? task = _dal.Task.ReadAll().FirstOrDefault(task => task?.Engineerid == id);//get one of the tasks that this engineer is in charge of it
+        DO.Task? task = _dal.Task.ReadAll().FirstOrDefault(task => task?.EngineerId == id);//get one of the tasks that this engineer is in charge of it
         return new BO.Engineer()//create the bl object for return
         {
             Id = id,
