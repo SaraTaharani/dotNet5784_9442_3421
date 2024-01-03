@@ -45,7 +45,7 @@
                             Console.WriteLine(ex.ToString());
                         }
                         break;
-                    case 'b'://read
+                    case 'b'://Read
                         Console.WriteLine("enter id of engineer to read");
                         int idRead = int.Parse(Console.ReadLine()!);
                         try
@@ -59,16 +59,17 @@
                         break;
                     case 'c'://readAll
                         Console.WriteLine("the list of the engineers");
-                        IEnumerable<Engineer?> listEngineers = s_dal!.Engineer!.ReadAll(); ;
-                        foreach (Engineer? engineer in listEngineers) { Console.WriteLine(engineer); }
+                        IEnumerable<BO.Engineer?> listEngineers = s_bl!.Engineer!.ReadAll(); ;
+                        foreach(   BO.Engineer? engineer in listEngineers) 
+                        { Console.WriteLine(engineer); }
                         break;
                     case 'd'://update
-                        Console.WriteLine("enter an id of engineer to update");
-                        int idUpdate = int.Parse(Console.ReadLine()!);
-                        Console.WriteLine("enter a name of engineer to update");
-                        string nameUpdate = Console.ReadLine()!;
-                        Console.WriteLine("enter a email of engineer to update");
-                        string emailUpdate = Console.ReadLine()!;
+                        Console.WriteLine("enter id for new engineer");
+                        int idtoUpdate = int.Parse(Console.ReadLine()!);
+                        Console.WriteLine("enter a name");
+                        string nametoUpdate = Console.ReadLine()!;
+                        Console.WriteLine("enter an email");
+                        string emailtoUpdate = Console.ReadLine()!;
                         try
                         {
                             Console.WriteLine("enter an engineer level between 0-4");
