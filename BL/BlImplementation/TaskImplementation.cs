@@ -1,7 +1,6 @@
 ﻿namespace BlImplementation;
 using BlApi;
 using BO;
-
 using DO;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +8,6 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 /*מה עוד נשאר?
-*לכתוב את הפונקציה לחישוב האבן דרך
 *לעשות את השורה הבאה בקריאייט:הוספת משימות קודמות מתוך רשימת המשימות הקיימת
 */
 internal class TaskImplementation : ITask
@@ -96,6 +94,10 @@ internal class TaskImplementation : ITask
      Deliverables = boTask.Deliverables,
      Remarks = boTask.Remarks
  };
+        IEnumerable<DO.Dependency>? allDependencies =//Create a list of the dependencies of this task
+            boTask.DependenciesList?.Select(dependency => new Dependency() { DependentTask= boTask.Id, DependsOnTask= dependency.Id});
+        from dependency in allDependencies
+        select _dal.Dependency.Create(dependency);
         try
         {
             int idTsk = _dal.Task.Create(doTask);
