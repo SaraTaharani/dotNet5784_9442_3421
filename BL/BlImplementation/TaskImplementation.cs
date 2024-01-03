@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 /*מה עוד נשאר?
+*לכתוב את הפונקציה לחישוב האבן דרך
 *לעשות את השורה הבאה בקריאייט:הוספת משימות קודמות מתוך רשימת המשימות הקיימת
 */
 internal class TaskImplementation : ITask
@@ -41,7 +42,20 @@ internal class TaskImplementation : ITask
     }
     private BO.MilestoneInTask? CalculationOfMilestone(DO.Task doTask)
     {
-        return null;
+        // Retrieve all dependencies for the given task ID
+        IEnumerable<DO.Dependency?> allDependencies = _dal.Dependency.ReadAll(
+            dependency => dependency?.DependsOnTask == doTask.Id).ToList();//create a list of all the dependencies of the task with the id that the function get 
+        
+        var myMilestone =    // Query the dependent tasks and select those that are milestones
+             from dependency in allDependencies
+             let dependentTask = _dal.Task.Read((int)dependency?.DependentTask!)
+             where dependentTask.IsMilestone
+             select (dependentTask.Id, dependentTask.Alias);
+
+         // Convert the result to a   BO.MilestoneInTask object'
+        return (BO.MilestoneInTask)myMilestone;
+
+
     }
     private BO.Status CalculationOfStatus(DO.Task task)
     {
@@ -136,7 +150,7 @@ internal class TaskImplementation : ITask
                 CreatedAtDate = doTask.CeratedAtDate,
                 Status = CalculationOfStatus(doTask), //Calculation Of Status by a function
                 DependenciesList = CalculationOfDependencies(doTask.EngineerId),//A function that return a list of the dependencies
-                Milestone = CalculationOfMilestone(doTask),//פונקציה שיוצרת אבן דרך מתאימה למשימה
+                Milestone = CalculationOfMilestone(doTask),//A function that creates an appropriate milestone for the task
                 BaselineStartDate = doTask.ScheduledDate,
                 StartDate = doTask.StartDate,
                 ForecastDate = doTask.StartDate + doTask.RequiredEffortTime,
