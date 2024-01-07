@@ -106,15 +106,8 @@ namespace DalTest
                         Console.WriteLine("enter task description ");
                         string description = Console.ReadLine()!;
                         DO.Task task = new(0, description, alias);
-                        try
-                        {
-                            int result = s_dal!.Task!.Create(task);
-                            Console.WriteLine("the task was added");
-                        }
-                        catch (DalAlreadyExistsException ex)
-                        {
-                            Console.WriteLine(ex);
-                        }
+                        int result = s_dal!.Task!.Create(task);
+                        Console.WriteLine("the task was added");
                         break;
                     case 'b'://read a task by id
                         Console.WriteLine("enter an id number for read");
@@ -143,8 +136,8 @@ namespace DalTest
                             string updescription = Console.ReadLine()!;
                             Console.WriteLine("enter alias task");
                             string upalias = Console.ReadLine()!;
-                         
-                            DO.Task upTask = new DO.Task() {Id= }(idUpdate, updescription, upalias);
+
+                            DO.Task upTask = new DO.Task() { Id = idUpdate , Description= updescription , Alias=upalias};
                             s_dal!.Task!.Update(upTask);
                         }
                         catch (Exception ex)

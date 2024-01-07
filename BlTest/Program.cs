@@ -1,5 +1,9 @@
-﻿using DalApi;
+﻿using BlApi;
+using BO;
+using DalApi;
 using DO;
+using System.Collections.Generic;
+using System.Reflection.Emit;
 
 namespace BlTest
 {//חסר: מחיקה והדפסה עבור כל ישות
@@ -106,6 +110,8 @@ namespace BlTest
                         //}
                        // catch (Exception ex) { Console.WriteLine(ex.ToString()); }
                         break;
+                    case 'f':
+                        break;
                 }
             }
             while (choose != 'f');
@@ -119,27 +125,79 @@ namespace BlTest
                 switch (choose)
                 {
                     case 'a'://add a task
+                        Console.WriteLine("enter task description");
+                        string description = Console.ReadLine()!;
                         Console.WriteLine("enter alias task");
                         string alias = Console.ReadLine()!;
-                        Console.WriteLine("enter task description ");
-                        string description = Console.ReadLine()!;
-                        DO.Task task = new(0, description, alias);
+                        //create the dependencies list
+                        IEnumerable<BO.TaskInList>? dependenciesList = new List<BO.TaskInList>();
+                        Console.WriteLine("enter the id of the dependen task. to end enter 0");
+                        int idDependsOnTask = int.Parse(Console.ReadLine()!);
+                        BO.Task? dependsOnTask = null;
+                        while (idDependsOnTask != 0)
+                        {
+                            try
+                            {
+                                dependsOnTask = s_bl.Task!.Read(idDependsOnTask);//read the task that the new task depends on
+                            }
+                            catch (Exception ex)//check if there is a task with this id
+                            {
+                                Console.WriteLine(ex.ToString());
+                            }
+                            //Creating a task in the list with the data of the task we read
+                            dependenciesList.ToList().Add(new BO.TaskInList()
+                            {
+                                Id = idDependsOnTask,
+                                Alias = dependsOnTask!.Alias,
+                                Description = dependsOnTask!.Description,
+                                Status = dependsOnTask!.Status
+                            });//add this task to the dependencies list
+                            idDependsOnTask = int.Parse(Console.ReadLine()!);
+                        }
+                        Console.WriteLine("enter the deliverables of the task");
+                        string deliverables = Console.ReadLine()!;
+                        Console.WriteLine("enter the remarks of the task");
+                        string remarks = Console.ReadLine()!;
+                        Console.WriteLine("enter the id of the engineer engineering the task");
+                        int engineerId = int.Parse(Console.ReadLine()!);
+                        BO.Engineer? engineer = null;
                         try
                         {
-                            int result = s_dal!.Task!.Create(task);
-                            Console.WriteLine("the task was added");
+                            engineer = s_bl.Engineer.Read(engineerId);//read the id of the engineer that engineering this task
                         }
-                        catch (DalAlreadyExistsException ex)
+                        catch (Exception ex)
                         {
-                            Console.WriteLine(ex);
+                            Console.WriteLine(ex.ToString());
                         }
+                        BO.Task newTask = new BO.Task()
+                        {
+                            Id = 0,
+                            Description = description,
+                            Alias = alias,
+                            DependenciesList = dependenciesList,
+                            CreatedAtDate = DateTime.Now,
+                            Status = (BO.Status)0,
+                            Milestone = null,
+                            BaselineStartDate = null,
+                            StartDate = null,
+                            ScheduledStartDate = null,
+                            ForecastDate = null,
+                            DeadlineDate = null,
+                            CompleteDate = null,
+                            Deliverables = deliverables,
+                            Remarks = remarks,
+                            Engineer = new BO.EngineerInTask() { Id = engineer!.Id, Name = engineer.Name },
+                            CopmlexityLevel = (BO.EngineerExperience)engineer.Level!
+                        };
+                        int result = s_bl!.Task!.Create(newTask);
+                        Console.WriteLine("the task was added");
                         break;
                     case 'b'://read a task by id
                         Console.WriteLine("enter an id number for read");
                         int id = int.Parse(Console.ReadLine()!);
                         try
                         {
-                            Console.WriteLine(s_dal!.Task?.Read(id));
+                            Console.WriteLine(s_bl!.Task?.Read(id));
                         }
                         catch (Exception ex)
                         {
@@ -147,45 +205,119 @@ namespace BlTest
                         }
                         break;
                     case 'c'://read all tasks
-                        Console.WriteLine("all  tasks:");
-                        IEnumerable<DO.Task?> arryOfAllTask = s_dal!.Task!.ReadAll();
+                        Console.WriteLine("all tasks:");
+                        IEnumerable<BO.Task?> arryOfAllTask = s_bl!.Task!.ReadAll();
                         foreach (var item in arryOfAllTask)
                             Console.WriteLine(item);
                         break;
                     case 'd'://update the task
                         Console.WriteLine("enter id of task to update");
-                        int idUpdate = int.Parse(Console.ReadLine()!);
+                        int updateId = int.Parse(Console.ReadLine()!);
+                        Console.WriteLine("enter task description");
+                        string updateDescription = Console.ReadLine()!;
+                        Console.WriteLine("enter alias task");
+                        string updateAlias = Console.ReadLine()!;
+                        //update the dependencies list
+                        IEnumerable<BO.TaskInList>? updateDependenciesList = new List<BO.TaskInList>();
+                        Console.WriteLine("enter the id of the dependen task. to end enter 0");
+                        int updateIdDependsOnTask = int.Parse(Console.ReadLine()!);
+                        BO.Task? updateDependsOnTask = null;
+                        while (updateIdDependsOnTask != 0)
+                        {
+                            try
+                            {
+                                dependsOnTask = s_bl.Task!.Read(updateIdDependsOnTask);//read the task that the new task depends on
+                            }
+                            catch (Exception ex)//check if there is a task with this id
+                            {
+                                Console.WriteLine(ex.ToString());
+                            }
+                            //Creating a task in the list with the data of the task we read
+                            updateDependenciesList.ToList().Add(new BO.TaskInList()
+                            {
+                                Id = updateIdDependsOnTask,
+                                Alias = updateDependsOnTask!.Alias,
+                                Description = updateDependsOnTask!.Description,
+                                Status = updateDependsOnTask!.Status
+                            });//add this task to the dependencies list
+                            updateIdDependsOnTask = int.Parse(Console.ReadLine()!);
+                        }
+                        Console.WriteLine("enter the task creation date ");
+                        DateTime updateCreatedAtDate = DateTime.Parse(Console.ReadLine()!);
+                        Console.WriteLine("enter the baseline start date of the task");
+                        DateTime updateBaselineStartDate = DateTime.Parse(Console.ReadLine()!);
+                        Console.WriteLine("enter the start date of the task");
+                        DateTime updateStartDate = DateTime.Parse(Console.ReadLine()!);
+                        Console.WriteLine("enter the scheduled start date of the task");
+                        DateTime updateScheduledStartDate = DateTime.Parse(Console.ReadLine()!);
+                        Console.WriteLine("enter the forecast date of the task");
+                        DateTime updateForecastDate = DateTime.Parse(Console.ReadLine()!);
+                        Console.WriteLine("enter the deadline date of the task");
+                        DateTime updateDeadlineDate = DateTime.Parse(Console.ReadLine()!);
+                        Console.WriteLine("enter the complete date of the task");
+                        DateTime updateCompleteDate = DateTime.Parse(Console.ReadLine()!);
+                        Console.WriteLine("enter the deliverables of the task");
+                        string updateDeliverables = Console.ReadLine()!;
+                        Console.WriteLine("enter the remarks of the task");
+                        string updateRemarks = Console.ReadLine()!;
+                        Console.WriteLine("enter the id of the engineer engineering the task");
+                        int updateEengineerId = int.Parse(Console.ReadLine()!);
+                        BO.Engineer? updateEngineer = null;
                         try
                         {
-                            Console.WriteLine("enter task description ");
-                            string updescription = Console.ReadLine()!;
-                            Console.WriteLine("enter alias task");
-                            string upalias = Console.ReadLine()!;
-
-                            DO.Task upTask = new DO.Task() { Id = }(idUpdate, updescription, upalias);
-                            s_dal!.Task!.Update(upTask);
+                            updateEngineer = s_bl.Engineer.Read(updateEengineerId);//read the id of the engineer that engineering this task
                         }
                         catch (Exception ex)
                         {
                             Console.WriteLine(ex.ToString());
                         }
-
+                        //create the updated task
+                        try
+                        {
+                            s_bl!.Task!.Update(new BO.Task()
+                            {
+                                Id = updateId,
+                                Alias = updateDependsOnTask!.Alias,
+                                Description = updateDependsOnTask!.Description,
+                                DependenciesList = updateDependenciesList,
+                                CreatedAtDate = updateCreatedAtDate,
+                                Status = (BO.Status)0,//לשאול תא המורה מה להציב פה
+                                Milestone = null,//לתקן את זה אחרי שעושים את אבן דרך
+                                BaselineStartDate = updateBaselineStartDate,
+                                StartDate = updateBaselineStartDate,
+                                ScheduledStartDate = updateScheduledStartDate,
+                                ForecastDate = updateForecastDate,
+                                DeadlineDate = updateDeadlineDate,
+                                CompleteDate = updateCompleteDate,
+                                Deliverables = updateDeliverables,
+                                Remarks = updateRemarks,
+                                Engineer = new BO.EngineerInTask() { Id = updateEngineer!.Id, Name = updateEngineer.Name },
+                                CopmlexityLevel = (BO.EngineerExperience)updateEngineer.Level!
+                            });
+                            Console.WriteLine("The update was successful");
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.ToString());
+                        }
                         break;
                     case 'e':
                         Console.WriteLine("enter id of task to delete");
                         int idForDelete = int.Parse(Console.ReadLine()!);
-                        try
-                        {
-                            s_dal!.Task!.Delete(idForDelete);
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex);
-                        }
+                        //try
+                        //{
+                        //    s_bl!.Task!.Delete(idForDelete);
+                        //}
+                        //catch (Exception ex)
+                        //{
+                        //    Console.WriteLine(ex);
+                        //}
+                        break;
+                    case 'f':
                         break;
                 }
-            } 
-
+            }
+            while (choose != 'f');
         }
         public static char submenu(string type)
         {
@@ -224,7 +356,7 @@ namespace BlTest
                         BOTask();
                         break;
                     case 3:
-                        BODepndency();
+                      //  BOMilestone();
                         break;
                     default:
                         break;
