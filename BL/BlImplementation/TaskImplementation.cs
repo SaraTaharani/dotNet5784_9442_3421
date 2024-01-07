@@ -71,14 +71,12 @@ internal class TaskImplementation : ITask
     //CRUD functions
     public int Create(BO.Task boTask)
     {
-        if (boTask.Id <= 0)//check if the id is positive
-            throw new BO.BlNotValidInputException("The id must be positive");
         if (boTask.Alias == "")//check if the user insert an alias
             throw new BO.BlNotValidInputException("The Alias must contain atleast one letter");
         DO.Task doTask =//Creating a task in the structure of DO
  new DO.Task()
  {
-     Id = boTask.Id,
+     Id = 0,
      Description = boTask.Description,
      Alias = boTask.Alias,
      EngineerId = boTask.Engineer!.Id,
@@ -95,18 +93,13 @@ internal class TaskImplementation : ITask
      Remarks = boTask.Remarks
  };
         IEnumerable<DO.Dependency>? allDependencies =//Create a list of the dependencies of this task
-            boTask.DependenciesList?.Select(dependency => new Dependency() { DependentTask= boTask.Id, DependsOnTask= dependency.Id});
-        from dependency in allDependencies
-        select _dal.Dependency.Create(dependency);
-        try
-        {
-            int idTsk = _dal.Task.Create(doTask);
-            return idTsk;
-        }
-        catch (DO.DalAlreadyExistsException ex)
-        {
-            throw new BO.BlAlreadyExistsException($"Task with ID={boTask.Id} already exists", ex);
-        }
+            boTask.DependenciesList?.Select(dependency => new Dependency()
+            { DependentTask = boTask.Id, DependsOnTask = dependency.Id });
+
+        var help = from dependency in allDependencies//create a dependency in the DB for every dependency in the dependenciesList of this task
+                   select _dal.Dependency.Create(dependency);
+        int idTsk = _dal.Task.Create(doTask);
+        return idTsk;
     }
     public BO.Task? Read(int id)
     {
@@ -190,8 +183,6 @@ internal class TaskImplementation : ITask
             CompleteDate = boTask.CompleteDate,
             Deliverables = boTask.Deliverables,
             Remarks = boTask.Remarks
-
-
         };//Creating a task in the structure of DO
         try
         {
