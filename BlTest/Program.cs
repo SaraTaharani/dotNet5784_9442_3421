@@ -139,7 +139,7 @@ namespace BlTest
                         int id = int.Parse(Console.ReadLine()!);
                         try
                         {
-                            Console.WriteLine(s_dal!.Task?.Read(id));
+                            Console.WriteLine(s_bl!.Task?.Read(id));
                         }
                         catch (Exception ex)
                         {
