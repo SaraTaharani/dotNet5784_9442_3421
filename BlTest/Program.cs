@@ -1,5 +1,8 @@
-﻿namespace BlTest
-{
+﻿using DalApi;
+using DO;
+
+namespace BlTest
+{//חסר: מחיקה והדפסה עבור כל ישות
     internal class Program
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
@@ -70,36 +73,120 @@
                         string nametoUpdate = Console.ReadLine()!;
                         Console.WriteLine("enter an email");
                         string emailtoUpdate = Console.ReadLine()!;
+
                         try
                         {
                             Console.WriteLine("enter an engineer level between 0-4");
                             int? level = int.Parse(Console.ReadLine()!);
-                            EngineerExperience levelUpdate;
-                            bool b = Enum.TryParse<EngineerExperience>(level.ToString(), out levelUpdate);
+                           BO.EngineerExperience levelUpdate;
+                            bool b = Enum.TryParse<BO.EngineerExperience>(level.ToString(), out levelUpdate);
                             if (!b)
-                                throw new LogicException("enter an engineer level between 0 - 4");
-                            EngineerExperience levelUpdate = (EngineerExperience)level;
+                                throw new BO.BlLogicException("enter an engineer level between 0 - 4");
+                          levelUpdate = (BO. EngineerExperience)level;
                             Console.WriteLine("enter cost of engineer to update");
                             int cost = int.Parse(Console.ReadLine()!);
-                            Engineer updateEngineer = new(idUpdate, nameUpdate, emailUpdate, cost, levelUpdate);
-                            s_dal!.Engineer!.Update(updateEngineer);
+                            BO.Engineer updateEngineer = new BO.Engineer()
+                            {
+                                Id = idtoUpdate,
+                                Name = nametoUpdate,
+                                Email = emailtoUpdate,
+                                Level = levelUpdate,
+                                Cost = cost
+                            };
+                            s_bl!.Engineer!.Update(updateEngineer);
                         }
                         catch (Exception ex) { Console.WriteLine(ex.ToString()); }
                         break;
                     case 'e'://delete
                         Console.WriteLine("enter id of en engineer to delete");
                         int idDelete = int.Parse(Console.ReadLine()!);
-                        try
-                        {
-                            s_dal!.Engineer!.Delete(idDelete);
-                        }
-                        catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+                        //try
+                        //{
+                        //    s_bl!.Engineer!.Delete(idDelete);
+                        //}
+                       // catch (Exception ex) { Console.WriteLine(ex.ToString()); }
                         break;
                 }
             }
             while (choose != 'f');
         }
+        public static void BOTask()
+        {
+            char choose;
+            do
+            {
+                choose = submenu("Task");
+                switch (choose)
+                {
+                    case 'a'://add a task
+                        Console.WriteLine("enter alias task");
+                        string alias = Console.ReadLine()!;
+                        Console.WriteLine("enter task description ");
+                        string description = Console.ReadLine()!;
+                        DO.Task task = new(0, description, alias);
+                        try
+                        {
+                            int result = s_dal!.Task!.Create(task);
+                            Console.WriteLine("the task was added");
+                        }
+                        catch (DalAlreadyExistsException ex)
+                        {
+                            Console.WriteLine(ex);
+                        }
+                        break;
+                    case 'b'://read a task by id
+                        Console.WriteLine("enter an id number for read");
+                        int id = int.Parse(Console.ReadLine()!);
+                        try
+                        {
+                            Console.WriteLine(s_dal!.Task?.Read(id));
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.ToString());
+                        }
+                        break;
+                    case 'c'://read all tasks
+                        Console.WriteLine("all  tasks:");
+                        IEnumerable<DO.Task?> arryOfAllTask = s_dal!.Task!.ReadAll();
+                        foreach (var item in arryOfAllTask)
+                            Console.WriteLine(item);
+                        break;
+                    case 'd'://update the task
+                        Console.WriteLine("enter id of task to update");
+                        int idUpdate = int.Parse(Console.ReadLine()!);
+                        try
+                        {
+                            Console.WriteLine("enter task description ");
+                            string updescription = Console.ReadLine()!;
+                            Console.WriteLine("enter alias task");
+                            string upalias = Console.ReadLine()!;
 
+                            DO.Task upTask = new DO.Task() { Id = }(idUpdate, updescription, upalias);
+                            s_dal!.Task!.Update(upTask);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.ToString());
+                        }
+
+                        break;
+                    case 'e':
+                        Console.WriteLine("enter id of task to delete");
+                        int idForDelete = int.Parse(Console.ReadLine()!);
+                        try
+                        {
+                            s_dal!.Task!.Delete(idForDelete);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex);
+                        }
+                        break;
+                }
+            } 
+
+        }
         public static char submenu(string type)
         {
             Console.WriteLine("for add a " + type + " press a");
