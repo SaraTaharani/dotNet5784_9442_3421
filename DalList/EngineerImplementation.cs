@@ -58,9 +58,9 @@ internal class EngineerImplementation : IEngineer
             throw new DalDoesNotExistException($"Engineer with ID={id} is not exists");
         if (DataSource.Tasks.Find(x => x?.EngineerId == id) is not null)///if the task cant be delete
             throw new DalDeletionImpossible($"Task with ID={id} cant be deleted");
-        Engineer newEngineer = new Engineer(engineer.Id, engineer.Name, engineer.Email, engineer.Cost, engineer.Level, false);
-        DataSource.Engineers.Remove(engineer);
-        DataSource.Engineers.Add(newEngineer);
+
+        Engineer newEngineer = engineer with { Active = false };
+        Update(newEngineer);
     }
     public void Reset()
     {
