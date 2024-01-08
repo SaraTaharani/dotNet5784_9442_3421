@@ -105,7 +105,8 @@ namespace DalTest
                         string alias = Console.ReadLine()!;
                         Console.WriteLine("enter task description ");
                         string description = Console.ReadLine()!;
-                        DO.Task task = new(0, description, alias,0,0,DateTime.Now,false,true,null,null,null,null,null,"","");
+                        //DO.Task task = new(0, description, alias,DateTime.Now,false,true,null,null,null,null,null,"","");
+                        DO.Task task = new(0, description, alias, DateTime.Now);
                         int result = s_dal!.Task!.Create(task);
                         Console.WriteLine("the task was added");
                         break;

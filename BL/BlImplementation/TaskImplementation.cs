@@ -31,11 +31,13 @@ internal class TaskImplementation : ITask
     }
     private BO.EngineerInTask? CalculateEngineer(DO.Task doTask)
     {
-        int engineerId = doTask.EngineerId;
+        int? engineerId = doTask.EngineerId;
+        if (engineerId == null)
+            return null;
         return new BO.EngineerInTask()
         {
-            Id = engineerId,
-            Name = _dal.Engineer.Read(engineerId)!.Name,
+            Id = (int)engineerId,
+            Name = _dal.Engineer.Read((int)engineerId)!.Name,
         };
     }
     private BO.MilestoneInTask? CalculationOfMilestone(DO.Task doTask)
@@ -139,12 +141,12 @@ internal class TaskImplementation : ITask
             from DO.Task doTask in _dal.Task.ReadAll()
             select new BO.Task()//create the objects in the list
             {
-                Id = doTask.EngineerId,
+                Id =doTask.Id,
                 Description = doTask!.Description,
                 Alias = doTask.Alias,
                 CreatedAtDate = doTask.CeratedAtDate,
                 Status = CalculationOfStatus(doTask), //Calculation Of Status by a function
-                DependenciesList = CalculationOfDependencies(doTask.EngineerId),//A function that return a list of the dependencies
+                DependenciesList = CalculationOfDependencies(doTask.Id),//A function that return a list of the dependencies
                 Milestone = CalculationOfMilestone(doTask),//A function that creates an appropriate milestone for the task
                 BaselineStartDate = doTask.ScheduledDate,
                 StartDate = doTask.StartDate,

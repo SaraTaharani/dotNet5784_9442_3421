@@ -20,8 +20,6 @@ public record Task(
     int Id,
     string Description,
     string Alias,
-    int EngineerId,
-    EngineerExperience Complexity,
     DateTime CeratedAtDate,//תאריך יצירת משימה
     bool IsMilestone = false,
     bool Active = true,//delete??
@@ -31,8 +29,10 @@ public record Task(
     DateTime? DeadlineDate = null,//תאריך סיום אחרון אפשרי
     DateTime? CompleteDate = null,//תאריך סיום
     string? Deliverables = null,
-    string? Remarks = null
+    string? Remarks = null,
+    int? EngineerId=null,
+    EngineerExperience? Complexity=null
     )
 {
-    public Task() : this(0, "", "", 0, 0, DateTime.Now) { }
+    public Task() : this(0, "", "", DateTime.Now) { }
 }
