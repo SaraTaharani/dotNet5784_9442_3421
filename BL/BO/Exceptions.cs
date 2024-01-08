@@ -45,8 +45,8 @@ public class BlLogicException : Exception
     public BlLogicException(string? message) : base(message) { }
     public BlLogicException(string message, Exception innerException)
                    : base(message, innerException) { }
-    BlLogicException
-
 }
+
+
 
 

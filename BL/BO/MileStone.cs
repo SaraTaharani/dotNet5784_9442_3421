@@ -22,7 +22,7 @@ namespace BO
         public  double? CompletionPercentage { get; set; } = null;
         public  string? Remarks { get; set; } = null;
         public List<BO.TaskInList>? Dependencies { get; set; } = null;
-        public override string ToString() => this.ToStringProperty();
+       // public override string ToString() => this.ToStringProperty();
 
     }
 }
