@@ -13,8 +13,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlTest\BlTest.csproj" />
     <ProjectReference Include="..\BL\BL.csproj" />
+    <ProjectReference Include="..\DalTest\DalTest.csproj" />
   </ItemGroup>
 
 </Project>

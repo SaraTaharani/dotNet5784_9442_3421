@@ -30,5 +30,14 @@ namespace PL
         {
             new EngineerListWindow().Show();
         }
+
+        private void BtnInitialization_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult resualt = MessageBox.Show("Do you want to Initialization the data?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (resualt == MessageBoxResult.Yes)
+            {
+                DalTest.Initialization.Do();
+            }
+        }
     }
 }

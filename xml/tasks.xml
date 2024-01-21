@@ -4,7 +4,7 @@
     <Id>100</Id>
     <Description>building permits</Description>
     <Alias />
-    <CeratedAtDate>2024-01-08T14:19:57.8035502+02:00</CeratedAtDate>
+    <CeratedAtDate>2024-01-21T14:05:24.8359061+02:00</CeratedAtDate>
     <IsMilestone>false</IsMilestone>
     <Active>true</Active>
     <RequiredEffortTime xsi:nil="true" />
@@ -15,13 +15,13 @@
     <Deliverables />
     <Remarks />
     <EngineerId>0</EngineerId>
-    <Complexity>Competent</Complexity>
+    <Complexity>AdvancedBeginner</Complexity>
   </Task>
   <Task>
     <Id>101</Id>
     <Description>organization</Description>
     <Alias />
-    <CeratedAtDate>2024-01-08T14:19:57.8147081+02:00</CeratedAtDate>
+    <CeratedAtDate>2024-01-21T14:05:24.840886+02:00</CeratedAtDate>
     <IsMilestone>false</IsMilestone>
     <Active>true</Active>
     <RequiredEffortTime xsi:nil="true" />
@@ -32,13 +32,13 @@
     <Deliverables />
     <Remarks />
     <EngineerId>0</EngineerId>
-    <Complexity>Competent</Complexity>
+    <Complexity>AdvancedBeginner</Complexity>
   </Task>
   <Task>
     <Id>102</Id>
     <Description>measurement</Description>
     <Alias />
-    <CeratedAtDate>2024-01-08T14:19:57.817555+02:00</CeratedAtDate>
+    <CeratedAtDate>2024-01-21T14:05:24.8424578+02:00</CeratedAtDate>
     <IsMilestone>false</IsMilestone>
     <Active>true</Active>
     <RequiredEffortTime xsi:nil="true" />
@@ -49,13 +49,13 @@
     <Deliverables />
     <Remarks />
     <EngineerId>0</EngineerId>
-    <Complexity>Competent</Complexity>
+    <Complexity>AdvancedBeginner</Complexity>
   </Task>
   <Task>
     <Id>103</Id>
     <Description>Fencing the site</Description>
     <Alias />
-    <CeratedAtDate>2024-01-08T14:19:57.8190702+02:00</CeratedAtDate>
+    <CeratedAtDate>2024-01-21T14:05:24.8437856+02:00</CeratedAtDate>
     <IsMilestone>false</IsMilestone>
     <Active>true</Active>
     <RequiredEffortTime xsi:nil="true" />
@@ -66,13 +66,13 @@
     <Deliverables />
     <Remarks />
     <EngineerId>0</EngineerId>
-    <Complexity>Competent</Complexity>
+    <Complexity>AdvancedBeginner</Complexity>
   </Task>
   <Task>
     <Id>104</Id>
     <Description>digging</Description>
     <Alias />
-    <CeratedAtDate>2024-01-08T14:19:57.8205351+02:00</CeratedAtDate>
+    <CeratedAtDate>2024-01-21T14:05:24.8451534+02:00</CeratedAtDate>
     <IsMilestone>false</IsMilestone>
     <Active>true</Active>
     <RequiredEffortTime xsi:nil="true" />
@@ -83,13 +83,13 @@
     <Deliverables />
     <Remarks />
     <EngineerId>0</EngineerId>
-    <Complexity>Competent</Complexity>
+    <Complexity>AdvancedBeginner</Complexity>
   </Task>
   <Task>
     <Id>105</Id>
     <Description>grounding</Description>
     <Alias />
-    <CeratedAtDate>2024-01-08T14:19:57.8220325+02:00</CeratedAtDate>
+    <CeratedAtDate>2024-01-21T14:05:24.8465443+02:00</CeratedAtDate>
     <IsMilestone>false</IsMilestone>
     <Active>true</Active>
     <RequiredEffortTime xsi:nil="true" />
@@ -100,13 +100,13 @@
     <Deliverables />
     <Remarks />
     <EngineerId>0</EngineerId>
-    <Complexity>Competent</Complexity>
+    <Complexity>AdvancedBeginner</Complexity>
   </Task>
   <Task>
     <Id>106</Id>
     <Description>plumbing</Description>
     <Alias />
-    <CeratedAtDate>2024-01-08T14:19:57.8237828+02:00</CeratedAtDate>
+    <CeratedAtDate>2024-01-21T14:05:24.847991+02:00</CeratedAtDate>
     <IsMilestone>false</IsMilestone>
     <Active>true</Active>
     <RequiredEffortTime xsi:nil="true" />
@@ -117,13 +117,13 @@
     <Deliverables />
     <Remarks />
     <EngineerId>0</EngineerId>
-    <Complexity>Competent</Complexity>
+    <Complexity>AdvancedBeginner</Complexity>
   </Task>
   <Task>
     <Id>107</Id>
     <Description>electrical power</Description>
     <Alias />
-    <CeratedAtDate>2024-01-08T14:19:57.8256436+02:00</CeratedAtDate>
+    <CeratedAtDate>2024-01-21T14:05:24.8495239+02:00</CeratedAtDate>
     <IsMilestone>false</IsMilestone>
     <Active>true</Active>
     <RequiredEffortTime xsi:nil="true" />
@@ -134,13 +134,13 @@
     <Deliverables />
     <Remarks />
     <EngineerId>0</EngineerId>
-    <Complexity>Competent</Complexity>
+    <Complexity>AdvancedBeginner</Complexity>
   </Task>
   <Task>
     <Id>108</Id>
     <Description>construction</Description>
     <Alias />
-    <CeratedAtDate>2024-01-08T14:19:57.8275635+02:00</CeratedAtDate>
+    <CeratedAtDate>2024-01-21T14:05:24.8510697+02:00</CeratedAtDate>
     <IsMilestone>false</IsMilestone>
     <Active>true</Active>
     <RequiredEffortTime xsi:nil="true" />
@@ -151,13 +151,13 @@
     <Deliverables />
     <Remarks />
     <EngineerId>0</EngineerId>
-    <Complexity>Competent</Complexity>
+    <Complexity>AdvancedBeginner</Complexity>
   </Task>
   <Task>
     <Id>109</Id>
     <Description>sealing</Description>
     <Alias />
-    <CeratedAtDate>2024-01-08T14:19:57.829331+02:00</CeratedAtDate>
+    <CeratedAtDate>2024-01-21T14:05:24.8526431+02:00</CeratedAtDate>
     <IsMilestone>false</IsMilestone>
     <Active>true</Active>
     <RequiredEffortTime xsi:nil="true" />
@@ -168,6 +168,6 @@
     <Deliverables />
     <Remarks />
     <EngineerId>0</EngineerId>
-    <Complexity>Competent</Complexity>
+    <Complexity>AdvancedBeginner</Complexity>
   </Task>
 </ArrayOfTask>
