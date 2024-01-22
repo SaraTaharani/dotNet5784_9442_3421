@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 */
 internal class TaskImplementation : ITask
 {
-    private DalApi.IDal _dal = DalApi.Factory.Get;
+    private readonly DalApi.IDal _dal = DalApi.Factory.Get;
     //Help functions
     private IEnumerable<BO.TaskInList>? CalculationOfDependencies(int id)
     {
@@ -47,15 +47,13 @@ internal class TaskImplementation : ITask
             dependency => dependency?.DependsOnTask == doTask.Id).ToList();//create a list of all the dependencies of the task with the id that the function get 
         
         var myMilestone =    // Query the dependent tasks and select those that are milestones
-             from dependency in allDependencies
+             (from dependency in allDependencies
              let dependentTask = _dal.Task.Read((int)dependency?.DependentTask!)
              where dependentTask.IsMilestone
-             select (dependentTask.Id, dependentTask.Alias);
+             select new BO.MilestoneInTask() { Id=dependentTask.Id, Alias=dependentTask.Alias }).FirstOrDefault();
 
          // Convert the result to a   BO.MilestoneInTask object'
-        return (BO.MilestoneInTask)myMilestone;
-
-
+        return myMilestone;
     }
     private BO.Status CalculationOfStatus(DO.Task task)
     {
@@ -131,9 +129,8 @@ internal class TaskImplementation : ITask
             Deliverables = doTask.Deliverables,
             Remarks = doTask.Remarks,
             Engineer = CalculateEngineer(doTask),//A function that will prepare an engineer object in the task 
-            CopmlexityLevel = (BO.EngineerExperience)doTask.Complexity
+            CopmlexityLevel = (BO.EngineerExperience)doTask.Complexity!
         };
-
     }
     public IEnumerable<BO.Task> ReadAll(Func<BO.Task, bool>? filter = null)
     {
@@ -156,7 +153,7 @@ internal class TaskImplementation : ITask
                 Deliverables = doTask.Deliverables,
                 Remarks = doTask.Remarks,
                 Engineer = CalculateEngineer(doTask),//A function that will prepare an engineer object in the task 
-                CopmlexityLevel = (BO.EngineerExperience)doTask.Complexity
+                CopmlexityLevel = (BO.EngineerExperience)doTask.Complexity!
             };
         if (filter == null)
             return allTasks!;
