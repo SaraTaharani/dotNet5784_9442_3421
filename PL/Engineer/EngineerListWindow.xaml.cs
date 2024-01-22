@@ -41,7 +41,6 @@ namespace PL.Engineer
         {
             EngineerList=(experience== BO.EngineerExperience.All)?
                 s_bl.Engineer.ReadAll()!:s_bl.Engineer.ReadAll((item => item.Level == experience));
-
         }
     }
 }
