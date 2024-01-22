@@ -21,6 +21,7 @@ namespace PL.Task
     public partial class TaskListWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+        public BO.Status status { get; set; } = BO.Status.All;
         public IEnumerable<BO.Task> TaskList
         {
             get { return (IEnumerable<BO.Task>)GetValue(TaskProperty); }
@@ -33,6 +34,12 @@ namespace PL.Task
         {
             InitializeComponent();
             TaskList = s_bl.Task.ReadAll()!;
+        }
+
+        private void StatusTask_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TaskList = (status == BO.Status.All) ?
+               s_bl.Task.ReadAll()! : s_bl.Task.ReadAll((item => item.Status == status));
         }
     }
 }
