@@ -8,6 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Button Content="Handle Engineers" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="54" Width="111" Click="btnEngineers_Click"/>
-        <Button Content="Initialization" HorizontalAlignment="Center" Height="50" Width="100" Click="BtnInitialization_Click"/>
+        <Button Content="Initialization" HorizontalAlignment="Center" Height="50" Width="100" Click="BtnInitialization_Click"/>
+        <Button Content="Handle Tasks" HorizontalAlignment="Left" Margin="10,83,0,0" VerticalAlignment="Top" Height="54" Width="111" Click="btnTasks_Click"/>
     </Grid>
 </Window>
