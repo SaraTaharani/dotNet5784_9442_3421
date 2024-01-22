@@ -91,7 +91,7 @@ internal class EngineerImplementation : IEngineer
                 Email = doEngineer.Email,
                 Level = (BO.EngineerExperience)doEngineer.Level!,
                 Cost = (double)doEngineer.Cost!,
-               Task = task != null ? new BO.TaskInEngineer() { Id = task.Id, Alias = task.Alias! } : null,
+               Task = (task != null ? new BO.TaskInEngineer() { Id = task.Id, Alias = task.Alias! } : null),
             };
         if (filter == null)
             return allEngineers!;
