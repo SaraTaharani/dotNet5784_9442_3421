@@ -26,6 +26,14 @@ namespace BO
         public string? Remarks { get; set; }
         public EngineerInTask? Engineer { get; set; }
         public EngineerExperience? CopmlexityLevel { get; set; }
-     //   public override string ToString() => this.ToStringProperty();
+        public override string ToString() =>
+       $"Task {{ Id: {Id}, Description: {Description}, Alias: {Alias}, " +
+       $", CreatedAtDate: {CreatedAtDate}, " +
+       $"Status: {Status}, Milestone: {Milestone}, BaselineStartDate: {BaselineStartDate}, " +
+       $"StartDate: {StartDate}, ScheduledStartDate: {ScheduledStartDate}, " +
+       $"ForecastDate: {ForecastDate}, DeadlineDate: {DeadlineDate}, " +
+       $"CompleteDate: {CompleteDate}, Deliverables: {Deliverables}, " +
+       $"Remarks: {Remarks}, Engineer: {Engineer}, CopmlexityLevel: {CopmlexityLevel} }}";
+
     }
 }
