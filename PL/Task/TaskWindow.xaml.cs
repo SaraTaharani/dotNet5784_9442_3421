@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PL.Engineer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,7 @@ namespace PL.Task
     /// </summary>
     public partial class TaskWindow : Window
     {
+        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public TaskWindow()
         {
             InitializeComponent();

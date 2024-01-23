@@ -41,5 +41,10 @@ namespace PL.Task
             TaskList = (status == BO.Status.All) ?
                s_bl.Task.ReadAll()! : s_bl.Task.ReadAll((item => item.Status == status));
         }
+
+        private void BtnAddTask_Click(object sender, RoutedEventArgs e)
+        {
+            new TaskWindow().Show();
+        }
     }
 }
