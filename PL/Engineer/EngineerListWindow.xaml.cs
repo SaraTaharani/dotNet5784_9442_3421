@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PL.Task;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,6 +42,11 @@ namespace PL.Engineer
         {
             EngineerList=(experience== BO.EngineerExperience.All)?
                 s_bl.Engineer.ReadAll()!:s_bl.Engineer.ReadAll((item => item.Level == experience));
+        }
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            new EngineerWindow().Show();
         }
     }
 }
