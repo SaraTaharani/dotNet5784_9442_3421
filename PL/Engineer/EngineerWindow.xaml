@@ -7,29 +7,26 @@
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
         Title="EngineerWindow" Height="450" Width="800"
-    DataContext="{Binding CurrentEngineerProperty, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
-    <Grid>
+        DataContext="{Binding CurrentEngineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+    <Grid Margin="0,0,0,19">
         <Label Content="Id:" HorizontalAlignment="Left" Margin="158,33,0,0" VerticalAlignment="Top" Height="32" Width="75"/>
         <Label Content="Name:" HorizontalAlignment="Left" Margin="158,86,0,0" VerticalAlignment="Top" Height="32" Width="63"/>
         <Label Content="Email:" HorizontalAlignment="Left" Margin="158,131,0,0" VerticalAlignment="Top" Height="32" Width="53" RenderTransformOrigin="1.698,0.907"/>
         <Label Content="Level:" HorizontalAlignment="Left" Margin="158,191,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.928,1.696"/>
         <Label Content="Cost" HorizontalAlignment="Left" Margin="158,253,0,0" VerticalAlignment="Top"/>
         <Label Content="Task" HorizontalAlignment="Left" Margin="158,304,0,0" VerticalAlignment="Top"/>
-        
-        <TextBox HorizontalAlignment="Left" Margin="273,38,0,0" TextWrapping="Wrap"  Text="{Binding CurrentEngineerProperty, Mode=TwoWay, NotifyOnValidationError=true,
-ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="273,86,0,0" TextWrapping="Wrap"  Text="{Binding CurrentEngineerProperty, Mode=TwoWay, NotifyOnValidationError=true,
-ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="273,138,0,0" TextWrapping="Wrap" Text="{Binding CurrentEngineerProperty, Mode=TwoWay, NotifyOnValidationError=true,
-ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120"/>
-        <ComboBox HorizontalAlignment="Left" Margin="273,195,0,0" VerticalAlignment="Top" Width="120"  ItemsSource="{Binding Source={StaticResource EngineerExperiencesCollectionKey}}"
-SelectedValue="{Binding InYear, Mode=TwoWay, NotifyOnValidationError=true,
-ValidatesOnExceptions=true}" SelectionChanged="EngineerLevel_SelectionChanged"/>
-        <TextBox HorizontalAlignment="Left" Margin="273,253,0,0" TextWrapping="Wrap"  Text="{Binding CurrentEngineerProperty, Mode=TwoWay, NotifyOnValidationError=true,
-ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="273,304,0,0" TextWrapping="Wrap"  Text="{Binding CurrentEngineerProperty, Mode=TwoWay, NotifyOnValidationError=true,
-ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="120"/>
-        <Button Content="{Binding Id, Mode = OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Left" Margin="293,356,0,0" VerticalAlignment="Top" Width="82" Height="28" Click="btnAddUpdate_Click"/>
 
+        <TextBox Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true,
+ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="273,38,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="120"/>
+        <TextBox Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true,
+ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="273,86,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox Text="{Binding Email, Mode=TwoWay, NotifyOnValidationError=true,
+ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="273,138,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <ComboBox SelectedValue="{Binding Path=Level, Mode=TwoWay}"  ItemsSource="{Binding Source={StaticResource EngineerExperiencesCollectionKey}}" HorizontalAlignment="Left" Margin="273,195,0,0" VerticalAlignment="Top" Width="120"  SelectionChanged="EngineerLevel_SelectionChanged"/>
+        <TextBox Text="{Binding Cost, Mode=TwoWay, NotifyOnValidationError=true,
+ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="273,253,0,0" TextWrapping="Wrap"   VerticalAlignment="Top" Width="120"/>
+        <TextBox Text="{Binding Task, Mode=TwoWay, NotifyOnValidationError=true,
+ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="273,304,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Left" Margin="293,356,0,0" VerticalAlignment="Top" Width="82" Height="28" Click="btnAddUpdate_Click"/>
     </Grid>
 </Window>

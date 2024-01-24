@@ -22,55 +22,37 @@ namespace PL.Engineer
     public partial class EngineerWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
         public BO.Engineer? CurrentEngineer
         {
             get { return (BO.Engineer?)GetValue(CurrentEngineerProperty); }
             set { SetValue(CurrentEngineerProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for CurrentCourse.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CurrentEngineerProperty =
-            DependencyProperty.Register("CurrentEngineer", typeof(BO.Engineer), typeof(AddUpdateEngineer), new PropertyMetadata(null));
+DependencyProperty.Register("CurrentEngineer", typeof(BO.Engineer),
+typeof(EngineerWindow), new PropertyMetadata(null));
+
         public EngineerWindow(int id = 0)
         {
-
             InitializeComponent();
-            try
+            if (id == 0)
             {
-                CurrentEngineer = (id != 0) ? s_bl.Engineer.Read(id)! : new BO.Engineer() { Id = 0, Name = "", EMail = "", Level = BO.EngineerExperience.None };
+                CurrentEngineer = new BO.Engineer() { Id=0, Name="",Email="" , Level=BO.EngineerExperience.All, Cost=0, Task=null};
             }
-            
-             
-          
-            //BO.Engineer? CurrentEngineer =  new BO.Engineer()
-            //{
-            //    Id = 0,
-            //    Name = "",
-            //    Email = "",
-            //    Level = BO.EngineerExperience.All
-            //};
-
-            if (id!=0)
+            else
             {
                 try
                 {
-                    if (s_bl.Engineer.Read(id) == null)
-                    {
-                        throw new BO.BlDoesNotExistException("this engineer dosnt exist");
-                    }
-                    else
-                        CurrentEngineer = s_bl.Engineer.Read(id)!;
+                    CurrentEngineer = s_bl.Engineer.Read(id)!;
                 }
-                catch (BlDoesNotExistException ex) {
-                    MessageBox.Show(ex.Message, "error in update engineer");
+                catch(BlDoesNotExistException ex) {
+                    CurrentEngineer = null;
+                    MessageBox.Show(ex.Message);
                 }
             }
-            //else
-            //{
-            //  engineer =  s_bl.Engineer.Read(id);
-            //}
+
         }
-  
 
         private void EngineerLevel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -81,7 +63,5 @@ namespace PL.Engineer
         {
 
         }
-
-      
     }
 }
