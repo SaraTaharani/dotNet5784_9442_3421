@@ -25,7 +25,7 @@ Width="auto">
             <ComboBox   SelectedValue="{Binding Path=status, Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource StatusTaskCollectionKey}}"
                        Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="StatusTask_SelectionChanged"/>
         </Grid>
-        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding Path=TaskList}">
+        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding Path=TaskList}" MouseDoubleClick="UpdateTask">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

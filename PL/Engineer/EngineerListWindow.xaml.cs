@@ -46,7 +46,7 @@ namespace PL.Engineer
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            new EngineerWindow().Show();
+            new EngineerWindow().ShowDialog();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using PL.Task;
+﻿using DalApi;
+using PL.Task;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,33 +19,64 @@ namespace PL.Task
     /// <summary>
     /// Interaction logic for TaskListWindow.xaml
     /// </summary>
+    /// 
     public partial class TaskListWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public BO.Status status { get; set; } = BO.Status.All;
-        public IEnumerable<BO.Task> TaskList
+        public IEnumerable<BO.TaskInList> TaskList
         {
-            get { return (IEnumerable<BO.Task>)GetValue(TaskProperty); }
+            get { return (IEnumerable<BO.TaskInList>)GetValue(TaskProperty); }
             set { SetValue(TaskProperty, value); }
         }
         public static readonly DependencyProperty TaskProperty =
-        DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.Task>),
+        DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.TaskInList>),
         typeof(TaskListWindow), new PropertyMetadata(null));
         public TaskListWindow()
         {
             InitializeComponent();
-            TaskList = s_bl.Task.ReadAll()!;
+            TaskList = from BO.Task boTask in s_bl.Task.ReadAll()
+                       select new BO.TaskInList()
+                       {
+                           Id = boTask.Id,
+                           Description = boTask.Description!,
+                           Alias = boTask.Alias!,
+                           Status = boTask.Status
+                       };
         }
 
         private void StatusTask_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             TaskList = (status == BO.Status.All) ?
-               s_bl.Task.ReadAll()! : s_bl.Task.ReadAll((item => item.Status == status));
+              from BO.Task boTask in s_bl.Task.ReadAll()
+              select new BO.TaskInList()
+              {
+                  Id = boTask.Id,
+                  Description = boTask.Description!,
+                  Alias = boTask.Alias!,
+                  Status = boTask.Status
+              }!
+              :
+              from BO.Task boTask in s_bl.Task.ReadAll(item=>item.Status==status)
+              select new BO.TaskInList()
+              {
+                  Id = boTask.Id,
+                  Description = boTask.Description!,
+                  Alias = boTask.Alias!,
+                  Status = boTask.Status
+              };
         }
 
         private void BtnAddTask_Click(object sender, RoutedEventArgs e)
         {
-            new TaskWindow().Show();
+            new TaskWindow().ShowDialog();
+        }
+
+        private void UpdateTask(object sender, MouseButtonEventArgs e)
+        {
+            BO.TaskInList? taskInList = (sender as ListView)?.SelectedItem as BO.TaskInList;
+            BO.Task? task= s_bl.Task.Read(taskInList!.Id);
+            new TaskWindow(task!.Id).ShowDialog();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using PL.Engineer;
+﻿using BO;
+using PL.Engineer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +22,34 @@ namespace PL.Task
     public partial class TaskWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-        public TaskWindow()
+        public BO.Task? CurrentTask
+        {
+            get { return (BO.Task?)GetValue(CurrentTaskProperty); }
+            set { SetValue(CurrentTaskProperty, value); }
+        }
+
+        public static readonly DependencyProperty CurrentTaskProperty =
+DependencyProperty.Register("CurrentTask", typeof(BO.Task),
+typeof(TaskWindow), new PropertyMetadata(null));
+        public TaskWindow(int id=0)
         {
             InitializeComponent();
+            if (id == 0)
+            {
+                CurrentTask = new BO.Task() { Id=0,Description="", Alias=""};
+            }
+            else
+            {
+                try
+                {
+                    CurrentTask = s_bl.Task.Read(id)!;
+                }
+                catch (BlDoesNotExistException ex)
+                {
+                    CurrentTask = null;
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
     }
 }
