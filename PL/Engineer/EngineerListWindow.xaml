@@ -26,7 +26,7 @@ Width="auto">
                        Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="EngineerLevel_SelectionChanged"/>
            
         </Grid>
-        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding Path=EngineerList}">
+        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding Path=EngineerList}" MouseDoubleClick="UpdateEngineer">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

@@ -21,6 +21,7 @@ namespace PL.Engineer
     /// </summary>
     public partial class EngineerWindow : Window
     {
+        public int STATE;
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
         public BO.Engineer? CurrentEngineer
@@ -38,12 +39,15 @@ typeof(EngineerWindow), new PropertyMetadata(null));
             InitializeComponent();
             if (id == 0)
             {
+                STATE = 0;
                 CurrentEngineer = new BO.Engineer() { Id=0, Name="",Email="" , Level=BO.EngineerExperience.All, Cost=0, Task=null};
             }
             else
             {
+                STATE = 1;
                 try
                 {
+                  
                     CurrentEngineer = s_bl.Engineer.Read(id)!;
                 }
                 catch(BlDoesNotExistException ex) {
@@ -54,14 +58,24 @@ typeof(EngineerWindow), new PropertyMetadata(null));
 
         }
 
-        private void EngineerLevel_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                if (STATE != 0)
+                {
+                    s_bl.Engineer.Update(CurrentEngineer!);
+                }
+                else
+                {
+                    s_bl.Engineer.Create(CurrentEngineer!);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            this.Close();
         }
     }
 }

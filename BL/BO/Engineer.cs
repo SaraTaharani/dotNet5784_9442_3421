@@ -14,6 +14,6 @@ namespace BO
         public EngineerExperience? Level { get; set; }
         public double Cost { get; set; }
         public TaskInEngineer? Task {  get; set; }
-        public override string ToString() => $"Engineer {{ Id: {Id}, Name: {Name}, Email: {Email}, Level: {Level}, Cost: {Cost}, Task: {Task} }}";
+        public override string ToString() => $" Id: {Id}, Name: {Name}, Email: {Email}, Level: {Level}, Cost: {Cost}, Task: {Task} ";
     }
 }

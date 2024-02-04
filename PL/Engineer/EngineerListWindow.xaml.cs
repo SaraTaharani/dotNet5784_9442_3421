@@ -1,6 +1,8 @@
 ﻿using PL.Task;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,30 +25,54 @@ namespace PL.Engineer
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public BO.EngineerExperience experience { get; set; } = BO.EngineerExperience.All;
+      
 
         public EngineerListWindow()
         {
             InitializeComponent();
-            EngineerList = s_bl.Engineer.ReadAll()!;
+            EngineerList =new ObservableCollection<BO.Engineer>(s_bl.Engineer.ReadAll()!) ;
+            Activated += EngineerListWindow_Activated!;
         }
-        public IEnumerable<BO.Engineer> EngineerList
+
+        private void EngineerListWindow_Activated(object sender, EventArgs e)
         {
-            get { return (IEnumerable<BO.Engineer>)GetValue(EngineerProperty); }
+            // Execute the query and update the list
+            var temp = experience == BO.EngineerExperience.All ? s_bl?.Engineer.ReadAll() :
+                s_bl?.Engineer.ReadAll(item => item.Level == experience);
+            EngineerList = (temp == null) ? new() : new(temp!);
+        }
+        public ObservableCollection<BO.Engineer> EngineerList
+        {
+            get { return (ObservableCollection<BO.Engineer>)GetValue(EngineerProperty); }
             set { SetValue(EngineerProperty, value); }
         }
         public static readonly DependencyProperty EngineerProperty =
-        DependencyProperty.Register("EngineerList", typeof(IEnumerable<BO.Engineer>),
+        DependencyProperty.Register("EngineerList", typeof(ObservableCollection<BO.Engineer>),
         typeof(EngineerListWindow), new PropertyMetadata(null));
 
         private void EngineerLevel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            EngineerList=(experience== BO.EngineerExperience.All)?
-                s_bl.Engineer.ReadAll()!:s_bl.Engineer.ReadAll((item => item.Level == experience));
+            var comboBox = sender as ComboBox;
+            if (comboBox != null && comboBox.SelectedItem != null)
+            {
+                experience = (BO.EngineerExperience)comboBox.SelectedItem;
+                var temp = experience == BO.EngineerExperience.All ? s_bl?.Engineer.ReadAll() :
+                    s_bl?.Engineer.ReadAll(item => item.Level == experience);
+                EngineerList = (temp == null) ? new() : new(temp!);
+            }
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             new EngineerWindow().ShowDialog();
+            CollectionViewSource.GetDefaultView(EngineerList).Refresh();
+
+        }
+        private void UpdateEngineer(object sender, MouseButtonEventArgs e)
+        {
+            BO.Engineer? engineerInList = (sender as ListView)?.SelectedItem as BO.Engineer;
+            BO.Engineer? engineer = s_bl.Engineer.Read(engineerInList!.Id);
+            new EngineerWindow(engineer!.Id).ShowDialog();
         }
     }
 }
