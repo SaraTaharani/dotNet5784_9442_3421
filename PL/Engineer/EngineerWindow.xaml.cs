@@ -47,12 +47,11 @@ typeof(EngineerWindow), new PropertyMetadata(null));
                 STATE = 1;
                 try
                 {
-                  
                     CurrentEngineer = s_bl.Engineer.Read(id)!;
                 }
                 catch(BlDoesNotExistException ex) {
                     CurrentEngineer = null;
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message,"error");
                 }
             }
 

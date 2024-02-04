@@ -12,7 +12,11 @@ class ConvertIdToContent : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return (int)value == 0 ? "Add" : "Update";
+        if ((int)value == 0)
+            return "Add";
+        else if ((int)value == -1)
+            return "Choose";
+        return "Update";
     }
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {

@@ -1,4 +1,5 @@
-﻿using PL.Task;
+﻿using BO;
+using PL.Task;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,6 +14,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PL.Engineer
@@ -23,13 +25,22 @@ namespace PL.Engineer
     
     public partial class EngineerListWindow : Window
     {
+        public BO.Engineer DataFromDialog { get; private set; }
+        public int Id { get; set; }
+        public int STATE;
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public BO.EngineerExperience experience { get; set; } = BO.EngineerExperience.All;
       
 
-        public EngineerListWindow()
+        public EngineerListWindow(int id=0)
         {
+            Id = id;
+            if (id == 0)
+                STATE = 0;
+            else
+                STATE = 1;
             InitializeComponent();
+            
             EngineerList =new ObservableCollection<BO.Engineer>(s_bl.Engineer.ReadAll()!) ;
             Activated += EngineerListWindow_Activated!;
         }
@@ -62,17 +73,30 @@ namespace PL.Engineer
             }
         }
 
-        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        private void BtnAddChoose_Click(object sender, RoutedEventArgs e)
         {
-            new EngineerWindow().ShowDialog();
-            CollectionViewSource.GetDefaultView(EngineerList).Refresh();
-
+            if(STATE==0)
+            {
+                new EngineerWindow().ShowDialog();
+                CollectionViewSource.GetDefaultView(EngineerList).Refresh();
+            }
+            else
+            {
+                DialogResult = true;
+            }
+            this.Close();
         }
         private void UpdateEngineer(object sender, MouseButtonEventArgs e)
         {
             BO.Engineer? engineerInList = (sender as ListView)?.SelectedItem as BO.Engineer;
             BO.Engineer? engineer = s_bl.Engineer.Read(engineerInList!.Id);
             new EngineerWindow(engineer!.Id).ShowDialog();
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+                BO.Engineer? selectedEngineer = (sender as ListView)?.SelectedItem as BO.Engineer;
+                DataFromDialog = selectedEngineer!;
         }
     }
 }

@@ -66,6 +66,7 @@ ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="202,570,0,0" Tex
         <Label Content="Level:" HorizontalAlignment="Left" Margin="32,597,0,0" VerticalAlignment="Top"/>
         <TextBox Text="{Binding CopmlexityLevel, Mode=TwoWay, NotifyOnValidationError=true,
 ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="202,601,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Left" Margin="670,579,0,0" VerticalAlignment="Top" Height="31" Width="59"/>
+        <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Left" Margin="670,579,0,0" VerticalAlignment="Top" Height="31" Width="59"  Click="btnAddUpdate_Click"/>
+        <Button Content="choose engineer" HorizontalAlignment="Left" Margin="211,501,0,0" VerticalAlignment="Top" Height="31" Width="102"  Click="btnChooseEngineer_Click"/>
     </Grid>
 </Window>
