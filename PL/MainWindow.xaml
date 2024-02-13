@@ -7,8 +7,31 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Handle Engineers" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="54" Width="111" Click="btnEngineers_Click"/>
-        <Button Content="Initialization" HorizontalAlignment="Center" Height="50" Width="100" Click="BtnInitialization_Click"/>
-        <Button Content="Handle Tasks" HorizontalAlignment="Left" Margin="10,83,0,0" VerticalAlignment="Top" Height="54" Width="111" Click="btnTasks_Click"/>
+        <Button   Content="Handle Engineers" HorizontalAlignment="Left" Margin="660,163,0,0" VerticalAlignment="Top" Height="54" Width="110" Click="btnEngineers_Click" RenderTransformOrigin="0.423,0.353">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Content="Initialization" HorizontalAlignment="Left" Height="50" Width="105" Click="BtnInitialization_Click" Margin="665,55,0,329">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Content="Handle Tasks" HorizontalAlignment="Left" Margin="665,271,0,0" VerticalAlignment="Top" Height="54" Width="110" Click="btnTasks_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Image HorizontalAlignment="Left" Margin="10,-13,0,-63" Width="627" Source="/istockphoto-476190573-612x612.jpg"/>
+
     </Grid>
 </Window>

@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="EngineerWindow" Height="500" Width="800"
         DataContext="{Binding CurrentEngineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
-    <Grid Margin="0,0,0,19">
+    <Grid Margin="0,0,0,19" RenderTransformOrigin="0.876,0.794">
         <Label Content="Id:" HorizontalAlignment="Left" Margin="158,33,0,0" VerticalAlignment="Top" Height="32" Width="75"/>
         <Label Content="Name:" HorizontalAlignment="Left" Margin="158,86,0,0" VerticalAlignment="Top" Height="32" Width="63"/>
         <Label Content="Email:" HorizontalAlignment="Left" Margin="158,131,0,0" VerticalAlignment="Top" Height="32" Width="53" RenderTransformOrigin="1.698,0.907"/>

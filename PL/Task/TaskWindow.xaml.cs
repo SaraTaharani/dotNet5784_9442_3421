@@ -95,5 +95,10 @@ typeof(TaskWindow), new PropertyMetadata(null));
             //BindingExpression be = .GetBindingExpression(TextBox.TextProperty);
             //be.UpdateSource();
         }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

@@ -13,8 +13,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="7e722cc2dc5e4addbd6c3986127f1a2a.png_wh860.png" />
+    <None Remove="istockphoto-476190573-612x612.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
     <ProjectReference Include="..\DalTest\DalTest.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="7e722cc2dc5e4addbd6c3986127f1a2a.png_wh860.png" />
+    <Resource Include="istockphoto-476190573-612x612.jpg" />
   </ItemGroup>
 
 </Project>
