@@ -21,7 +21,7 @@ Width="auto">
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="Label" HorizontalAlignment="Left" Margin="321,0,0,0" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="selceted by:" HorizontalAlignment="Left" Margin="321,0,0,0" VerticalAlignment="Center"/>
             <ComboBox   SelectedValue="{Binding Path=experience, Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource EngineerExperiencesCollectionKey}}"
                        Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="EngineerLevel_SelectionChanged"/>
            

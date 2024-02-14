@@ -21,7 +21,7 @@ Width="auto">
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="seleted by:l" HorizontalAlignment="Left" Margin="318,0,0,9" VerticalAlignment="Bottom"/>
+            <Label Grid.Column="0" Content="selceted by:" HorizontalAlignment="Left" Margin="318,0,0,9" VerticalAlignment="Bottom"/>
             <ComboBox   SelectedValue="{Binding Path=status, Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource StatusTaskCollectionKey}}"
                        Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="StatusTask_SelectionChanged"/>
         </Grid>

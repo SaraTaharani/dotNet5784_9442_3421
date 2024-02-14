@@ -11,7 +11,7 @@ public static class Initialization
     public const int MAX_ID = 400000000;
     private static IDal? s_dal;
     private static readonly Random s_rand = new();
-
+    public static int engineerId=0;
 
     private static void createEngineer()
     {
@@ -38,6 +38,7 @@ public static class Initialization
             int _id;
             
             _id = s_rand.Next(MIN_ID, MAX_ID + 1);
+            engineerId = _id;
          //   while (s_dalEngineer!.Read(_id) != null);
             string _email = _name + _id + "@gmail.com";
             int _cost = 0;
@@ -63,6 +64,7 @@ public static class Initialization
 
     private static void createTask()
     {
+        
         string[] taskDescriptions =
         {
             "building permits",//היתרי בניה
@@ -82,9 +84,11 @@ public static class Initialization
         };
         //
         EngineerExperience _complexityLevel = (EngineerExperience)(s_rand.Next(0, 3));
+       
         for (int i = 0; i < 10; i++)
         {
-            Task newTask = new(i, taskDescriptions[i], "", DateTime.Now, false,true, null, null, null, null, null, "", "", 0, _complexityLevel);
+         
+            Task newTask = new(i, taskDescriptions[i], "", DateTime.Now, false,true, null, null, null, null, null, "", "", engineerId, _complexityLevel);
             s_dal!.Task!.Create(newTask);
         }
     }
