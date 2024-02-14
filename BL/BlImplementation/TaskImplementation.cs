@@ -163,8 +163,8 @@ internal class TaskImplementation : ITask
     {
         if (boTask.Id <= 0)//check if the id is positive
             throw new BO.BlNotValidInputException("The id must be positive");
-        if (boTask.Alias == "")//check if the user insert an alias
-            throw new BO.BlNotValidInputException("The Alias must contain atleast one letter");
+        //if (boTask.Alias == "")//check if the user insert an alias
+        //    throw new BO.BlNotValidInputException("The Alias must contain atleast one letter");
         DO.Task doTask = new DO.Task
         {
             Id = boTask.Id,

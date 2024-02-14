@@ -69,12 +69,13 @@ typeof(EngineerWindow), new PropertyMetadata(null));
                 {
                     s_bl.Engineer.Create(CurrentEngineer!);
                 }
+                this.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            this.Close();
+
         }
     }
 }

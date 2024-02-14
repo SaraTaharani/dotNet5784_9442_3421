@@ -84,7 +84,6 @@ namespace PL.Engineer
             {
                 DialogResult = true;
             }
-            this.Close();
         }
         private void UpdateEngineer(object sender, MouseButtonEventArgs e)
         {
