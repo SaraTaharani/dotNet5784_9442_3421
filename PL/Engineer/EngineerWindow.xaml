@@ -7,6 +7,7 @@
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
         Title="EngineerWindow" Height="500" Width="800"
+          FontFamily="Fb Azimut Black"
         DataContext="{Binding CurrentEngineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
     <Grid Margin="0,0,0,19" RenderTransformOrigin="0.876,0.794">
         <Label Content="Id:" HorizontalAlignment="Left" Margin="158,33,0,0" VerticalAlignment="Top" Height="32" Width="75"/>
@@ -25,7 +26,14 @@ ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="273,138,0,0" Tex
         <ComboBox SelectedValue="{Binding Path=Level, Mode=TwoWay}"  ItemsSource="{Binding Source={StaticResource EngineerExperiencesCollectionKey}}" HorizontalAlignment="Left" Margin="273,195,0,0" VerticalAlignment="Top" Width="120"/>
         <TextBox Text="{Binding Cost, Mode=TwoWay, NotifyOnValidationError=true,
 ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="280,247,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-        <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Left" Margin="293,374,0,0" VerticalAlignment="Top" Width="82" Height="28" Click="btnAddUpdate_Click"/>
+        <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Left" Margin="293,374,0,0" VerticalAlignment="Top" Width="82" Height="28" Click="btnAddUpdate_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <Label Content="Id" HorizontalAlignment="Left" Margin="158,300,0,0" VerticalAlignment="Top"/>
         <TextBox IsEnabled="False" Text="{Binding Task.Id, Mode=TwoWay, NotifyOnValidationError=true,
 ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="273,304,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>

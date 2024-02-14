@@ -21,18 +21,34 @@ Width="auto">
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="Label" HorizontalAlignment="Left" Margin="318,0,0,0" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="seleted by:l" HorizontalAlignment="Left" Margin="318,0,0,9" VerticalAlignment="Bottom"/>
             <ComboBox   SelectedValue="{Binding Path=status, Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource StatusTaskCollectionKey}}"
                        Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="StatusTask_SelectionChanged"/>
         </Grid>
-        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding Path=TaskList}" MouseDoubleClick="UpdateTask">
+        <ListView Margin="261,5,246,5" Grid.Row="1" ItemsSource="{Binding Path=TaskList}" MouseDoubleClick="UpdateTask">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridView.ColumnHeaderContainerStyle>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Background" Value="White"/>
+                        </Style>
+                    </GridView.ColumnHeaderContainerStyle>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50"/>
+                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="120"/>
+                    <GridViewColumn Header="Alias" DisplayMemberBinding="{Binding Alias}" Width="100"/>
+
                 </GridView>
+
             </ListView.View>
         </ListView>
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="BtnAddTask_Click"/>
+        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="BtnAddTask_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
 
     </Grid>
 </Window>

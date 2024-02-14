@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfEngineer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Engineer>
-    <Id>310521216</Id>
-    <Name>Dina Klein</Name>
-    <Email>Dina Klein310521216@gmail.com</Email>
-    <Cost>300</Cost>
-    <Level>AdvancedBeginner</Level>
-    <Active>true</Active>
-  </Engineer>
-  <Engineer>
-    <Id>285018249</Id>
-    <Name>Shira Israelof</Name>
-    <Email>Shira Israelof285018249@gmail.com</Email>
-    <Cost>200</Cost>
-    <Level>Proficient</Level>
-    <Active>true</Active>
-  </Engineer>
-  <Engineer>
     <Id>340293906</Id>
     <Name>Hodaya Shteinhouse</Name>
     <Email>Hodaya Shteinhouse340293906@gmail.com</Email>
@@ -158,6 +142,30 @@
     <Email>Sarale taharani254981663@gmail.com</Email>
     <Cost>400</Cost>
     <Level>AdvancedBeginner</Level>
+    <Active>true</Active>
+  </Engineer>
+  <Engineer>
+    <Id>310521216</Id>
+    <Name>Dina K</Name>
+    <Email>Dina Klein310521216@gmail.com</Email>
+    <Cost>340</Cost>
+    <Level>AdvancedBeginner</Level>
+    <Active>true</Active>
+  </Engineer>
+  <Engineer>
+    <Id>285018249</Id>
+    <Name>Shira Israelof</Name>
+    <Email>Shira Israelof285018249@gmail.com</Email>
+    <Cost>500</Cost>
+    <Level>Expert</Level>
+    <Active>true</Active>
+  </Engineer>
+  <Engineer>
+    <Id>234543454</Id>
+    <Name>ggh</Name>
+    <Email>ggh@gmail.com</Email>
+    <Cost>200</Cost>
+    <Level>Competent</Level>
     <Active>true</Active>
   </Engineer>
 </ArrayOfEngineer>

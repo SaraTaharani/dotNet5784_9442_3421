@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.ComponentModel;
 
 namespace PL.Task
 {
@@ -22,15 +23,9 @@ namespace PL.Task
     /// Interaction logic for TaskWindow.xaml
     /// </summary>
     public partial class TaskWindow : Window
-    {
-        public int STATE;
+    { 
+    public int STATE;
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         public BO.Task? CurrentTask
         {
@@ -52,7 +47,7 @@ typeof(TaskWindow), new PropertyMetadata(null));
                     Alias = "",
                     DependenciesList = null,
                     CreatedAtDate = DateTime.Now,
-                    Status = BO.Status.All,
+                    Status = BO.Status.Unscheduled,
                     Milestone = null,
                     BaselineStartDate = null,
                     StartDate = null,
@@ -105,17 +100,12 @@ typeof(TaskWindow), new PropertyMetadata(null));
             EngineerListWindow dialogWindow = new EngineerListWindow(-1);
             dialogWindow.ShowDialog();
             BO.Engineer dataFromDialog = dialogWindow.DataFromDialog;
-            BO.EngineerInTask selectedEngineer=new EngineerInTask() { Id=dataFromDialog.Id , Name=dataFromDialog.Name};
-            CurrentTask!.Engineer = selectedEngineer;
-            OnPropertyChanged("Engineer");
-            // itemNameTextBox is an instance of a TextBox
-            //BindingExpression be = .GetBindingExpression(TextBox.TextProperty);
-            //be.UpdateSource();
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            BO.EngineerInTask selectedEngineer=new BO.EngineerInTask() { Id=dataFromDialog.Id , Name=dataFromDialog.Name};
+            CurrentTask!.Engineer= selectedEngineer;
+            CurrentTask!.CopmlexityLevel = dataFromDialog.Level;
+           // itemNameTextBox is an instance of a TextBox
+           //BindingExpression be = .GetBindingExpression(TextBox.TextProperty);
+           // be.UpdateSource();
         }
     }
 }

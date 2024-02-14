@@ -92,12 +92,12 @@ internal class TaskImplementation : ITask
      Deliverables = boTask.Deliverables,
      Remarks = boTask.Remarks
  };
-        IEnumerable<DO.Dependency>? allDependencies =//Create a list of the dependencies of this task
-            boTask.DependenciesList?.Select(dependency => new Dependency()
-            { DependentTask = boTask.Id, DependsOnTask = dependency.Id });
+ //       IEnumerable<DO.Dependency>? allDependencies =//Create a list of the dependencies of this task
+ //           boTask.DependenciesList?.Select(dependency => new Dependency()
+ //           { DependentTask = boTask.Id, DependsOnTask = dependency.Id });
 
-        var help = from dependency in allDependencies//create a dependency in the DB for every dependency in the dependenciesList of this task
-                   select _dal.Dependency.Create(dependency);
+ //       var help = from dependency in allDependencies//create a dependency in the DB for every dependency in the dependenciesList of this task
+ //                  select _dal.Dependency.Create(dependency);
         int idTsk = _dal.Task.Create(doTask);
         return idTsk;
     }

@@ -29,9 +29,31 @@ Width="auto">
         <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding Path=EngineerList}" MouseDoubleClick="UpdateEngineer" SelectionChanged="ListView_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridView.ColumnHeaderContainerStyle>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Background" Value="White"/>
+                        </Style>
+                    </GridView.ColumnHeaderContainerStyle>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="120"/>
+                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}" Width="100"/>
+                    <GridViewColumn Header="Level" DisplayMemberBinding="{Binding Level}" Width="100"/>
+                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}" Width="100"/>
+                    <GridViewColumn Header="Cost" DisplayMemberBinding="{Binding Cost}" Width="100"/>
+                   
+             <GridViewColumn Header="Task" DisplayMemberBinding="{Binding Task}" Width="100"/>
+                  
+                    
                 </GridView>
+
             </ListView.View>
-        </ListView>        <Button  Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="BtnAddChoose_Click"/>
+        </ListView>        <Button  Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="BtnAddChoose_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
     </Grid>
 </Window>

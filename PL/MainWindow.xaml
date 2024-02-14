@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button   Content="Handle Engineers" HorizontalAlignment="Left" Margin="660,163,0,0" VerticalAlignment="Top" Height="54" Width="110" Click="btnEngineers_Click" RenderTransformOrigin="0.423,0.353">
+        <Button   Content="Handle Engineers" HorizontalAlignment="Left" Margin="660,163,0,0" VerticalAlignment="Top" Height="54" Width="110" Click="btnEngineers_Click" RenderTransformOrigin="0.423,0.353" Foreground="White">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -15,7 +15,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button Content="Initialization" HorizontalAlignment="Left" Height="50" Width="105" Click="BtnInitialization_Click" Margin="665,55,0,329">
+        <Button Content="Initialization" HorizontalAlignment="Left" Width="105" Click="BtnInitialization_Click" Margin="665,55,0,301" Foreground="#FFF5F3F3">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -23,7 +23,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button Content="Handle Tasks" HorizontalAlignment="Left" Margin="665,271,0,0" VerticalAlignment="Top" Height="54" Width="110" Click="btnTasks_Click">
+        <Button Content="Handle Tasks" HorizontalAlignment="Left" Margin="660,261,0,0" VerticalAlignment="Top" Height="54" Width="110" Click="btnTasks_Click" Foreground="White">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
