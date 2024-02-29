@@ -103,29 +103,24 @@ typeof(TaskWindow), new PropertyMetadata(null));
             BO.EngineerInTask selectedEngineer=new BO.EngineerInTask() { Id=dataFromDialog.Id , Name=dataFromDialog.Name};
             CurrentTask = new BO.Task()
             {
-                Id = 0,
-                Description = "",
-                Alias = "",
-                DependenciesList = null,
-                CreatedAtDate = DateTime.Now,
-                Status = BO.Status.Unscheduled,
-                Milestone = null,
-                BaselineStartDate = null,
-                StartDate = null,
-                ScheduledStartDate = null,
-                ForecastDate = null,
-                DeadlineDate = null,
-                CompleteDate = null,
-                Deliverables = null,
-                Remarks = null,
+                Id = CurrentTask!.Id,
+                Description = CurrentTask.Description,
+                Alias = CurrentTask.Alias,
+                DependenciesList = CurrentTask.DependenciesList,
+                CreatedAtDate = CurrentTask.CreatedAtDate,
+                Status = CurrentTask.Status,
+                Milestone = CurrentTask.Milestone,
+                BaselineStartDate = CurrentTask.BaselineStartDate,
+                StartDate = CurrentTask.StartDate,
+                ScheduledStartDate = CurrentTask.ScheduledStartDate,
+                ForecastDate = CurrentTask.ForecastDate,
+                DeadlineDate = CurrentTask.DeadlineDate,
+                CompleteDate = CurrentTask.CompleteDate,
+                Deliverables = CurrentTask.Deliverables,
+                Remarks = CurrentTask.Remarks,
                 Engineer = selectedEngineer,
                 CopmlexityLevel = dataFromDialog.Level,
             };
-            //CurrentTask!.Engineer= selectedEngineer;
-            //CurrentTask!.CopmlexityLevel = dataFromDialog.Level;
-           // itemNameTextBox is an instance of a TextBox
-           //BindingExpression be = .GetBindingExpression(TextBox.TextProperty);
-           // be.UpdateSource();
         }
     }
 }
