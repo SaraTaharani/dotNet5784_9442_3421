@@ -101,8 +101,28 @@ typeof(TaskWindow), new PropertyMetadata(null));
             dialogWindow.ShowDialog();
             BO.Engineer dataFromDialog = dialogWindow.DataFromDialog;
             BO.EngineerInTask selectedEngineer=new BO.EngineerInTask() { Id=dataFromDialog.Id , Name=dataFromDialog.Name};
-            CurrentTask!.Engineer= selectedEngineer;
-            CurrentTask!.CopmlexityLevel = dataFromDialog.Level;
+            CurrentTask = new BO.Task()
+            {
+                Id = 0,
+                Description = "",
+                Alias = "",
+                DependenciesList = null,
+                CreatedAtDate = DateTime.Now,
+                Status = BO.Status.Unscheduled,
+                Milestone = null,
+                BaselineStartDate = null,
+                StartDate = null,
+                ScheduledStartDate = null,
+                ForecastDate = null,
+                DeadlineDate = null,
+                CompleteDate = null,
+                Deliverables = null,
+                Remarks = null,
+                Engineer = selectedEngineer,
+                CopmlexityLevel = dataFromDialog.Level,
+            };
+            //CurrentTask!.Engineer= selectedEngineer;
+            //CurrentTask!.CopmlexityLevel = dataFromDialog.Level;
            // itemNameTextBox is an instance of a TextBox
            //BindingExpression be = .GetBindingExpression(TextBox.TextProperty);
            // be.UpdateSource();
