@@ -48,3 +48,12 @@ This layered approach demonstrates:
 5. Run the main project (e.g., PL)
 
 6. Run tests from Test Explorer / terminal
+
+## What You’ll Learn
+
+This project demonstrates:
+
+- Managing multi‑project .NET solutions
+- Layered architecture (PL / BL / DAL)
+- Implementing business logic and data access patterns
+- Writing and running unit tests
